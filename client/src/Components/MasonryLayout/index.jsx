@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { addImageHeight } from "../Test2";
+import { addImageHeight } from "../../utils/utils";
 import PhotoAlbum from "react-photo-album";
 import Modal from "./PreviewModal";
 import style from "./index.module.css";
@@ -36,7 +36,7 @@ const MasonLayout = ({ url }) => {
 
   useEffect(() => {
     fetchData();
-  }, [url]);
+  }, [url, mediaType]);
 
   function filterNonImageData() {
     // get the items array from the recentData object, or use an empty array if it is undefined

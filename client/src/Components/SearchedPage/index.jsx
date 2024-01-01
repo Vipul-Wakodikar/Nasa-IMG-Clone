@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React from "react";
 import style from "./index.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { updateSearch } from "../../features/data/dataSlice";

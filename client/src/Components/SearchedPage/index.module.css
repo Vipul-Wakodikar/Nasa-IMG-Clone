@@ -9,7 +9,7 @@
 .cardContainer {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  justify-items: center; /* Center individual cards within each column */
+  justify-items: center;
   overflow-x: hidden;
 }
 .videoContainer {

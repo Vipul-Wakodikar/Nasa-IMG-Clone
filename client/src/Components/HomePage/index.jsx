@@ -13,7 +13,7 @@ const HomePage = () => {
       <button onClick={() => setIsPopular(true)} className={isPopular && style.activeButton}>Trending & Popular</button>
     </div>
   );
-    console.log('first', isPopular)
+
   return (
     <>
       <TrendingButtons />
