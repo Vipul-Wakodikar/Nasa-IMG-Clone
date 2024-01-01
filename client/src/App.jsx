@@ -4,8 +4,9 @@ import SearchedPage from "./Components/SearchedPage";
 import { Route, Routes } from "react-router-dom";
 import NotFound from "./Components/NotFound";
 import Header from "./Components/Header";
-import Test from "./Components/MasonryLayout";
+
 import Test2 from "./Components/Test2";
+import Test from "./Components/Test";
 
 function App() {
   const searchValue = useSelector((state) => state.data.value);

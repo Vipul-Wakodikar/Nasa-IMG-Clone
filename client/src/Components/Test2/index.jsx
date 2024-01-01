@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PhotoAlbum from "react-photo-album";
 import data from "../MasonryLayout/data";
+import notFound from "../../assets/Image404NotFound.jpg";
 
 export function addImageHeight(array) {
     // create an array of promises
@@ -14,8 +15,8 @@ export function addImageHeight(array) {
         // add an onload event handler
         img.onload = function () {
           // get the natural height and width of the image
-          let height = img.naturalHeight;
-          let width = img.naturalWidth;
+          let height = img.naturalHeight || 200;
+          let width = img.naturalWidth || 200;
           // create a copy of the object and add the height and width properties
           let newObj = { ...obj, height, width };
           // resolve the promise with the new object
@@ -24,7 +25,14 @@ export function addImageHeight(array) {
         // add an onerror event handler
         img.onerror = function () {
           // reject the promise with an error message
-          reject(`Failed to load image from ${obj.src}`);
+          // reject(`Failed to load image from ${obj.src}`);
+          let height = 200;
+          let width = 200;
+          let src = "hide"
+          // create a copy of the object and add the height and width properties
+          let newObj = { ...obj,src, height, width };
+          // resolve the promise with the new object
+          resolve(newObj);
         };
       });
     });

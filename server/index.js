@@ -18,4 +18,8 @@ app.get("/apod", (req, res) => {
     .then((resObj) => resObj.json())
     .then((data) => res.json(data));
 });
+app.get("/api/:id", (req,res) => {
+  const id = req.params.id
+  res.json({a: "asdasd", b: "asdasd", c: id || "nf"})
+})
 app.listen(5000, () => console.log("Backend is running"));

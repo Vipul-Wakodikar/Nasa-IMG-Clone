@@ -30,13 +30,19 @@
 ![Alt text](image-1.png)
 
 2. Created separate Masonry Layout with url as props or parameters so that it will be easier to display the webpage with mosaic layout
-
 3. Masonry Effect is acheived with the help of react-photo-album
-
 4. Added custom styles in Modal
-
 5. Added video overlay to distinguish between images and video.
-
 6. HeaderModal APOD UI fix.
-
 7. Focus and Active UI fix in the Homepage with respect to Trending and latest button
+
+
+# Version 1.3
+
+1. Added image for mp3 data
+2. Masonary is now available for image that is being rendered after searching any information
+3. Page will re-render whenever user change media type
+4. Bug fixed, when audio is selected and switch to video only media type audio and video both are getting rendered
+5. users can now view image, video or audio at once in homepage 
+6. Added security features where secret key is now hidden in source and in network tab
+7. Integrated both client and server using concurrently package

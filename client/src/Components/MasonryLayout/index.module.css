@@ -50,6 +50,23 @@
   font-size: 1.5em;
 }
 
+.audioWidth {
+  width: -webkit-fill-available;
+}
+
+.titleStyle {
+  color: white;
+}
+
+.audioImageStyle {
+  display: grid;
+  justify-content: center;
+}
+
+.hideButton {
+  display: none !important;
+}
+
 @media only screen and (max-width: 1024px) {
   .hdImgStyle {
     max-width: -webkit-fill-available;
