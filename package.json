@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "client": "cd client && npm run dev",
     "server": "cd server && npm run start",
+    "install": "concurrently \"cd client && npm i\" \"cd server && npm i\"",
     "dev": "concurrently \"npm run client\" \"npm run server\""
   },
   "keywords": [],
