@@ -50,7 +50,7 @@ to make sure the project run in your local environment please install above vers
     },
     });
 ```
-10. run below command within the main folder to concurrently run both client and server
+9. run below command within the main folder to concurrently run both client and server
 
 please make sure with in terminal you are in main / root folder and type below command to run the web app
 
