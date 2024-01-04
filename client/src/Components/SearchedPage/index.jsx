@@ -13,7 +13,7 @@ const SearchedPage = () => {
   const PathRender = () => (
     <>
       <div className={style.rootCardContainer}>
-        <p>
+        <p style={{ color: "white" }}>
           <a href="/" onClick={() => dispatch(updateSearch(""))}>Home</a> &gt;&gt; {searchValue}
         </p>
       </div>

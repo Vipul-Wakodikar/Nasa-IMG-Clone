@@ -103,8 +103,7 @@ const MasonLayout = ({ url }) => {
                 </button>
               ) : (
                 <>
-                  {(photo.data[0].media_type.includes("audio") || mediaType !== "image" || mediaType !== "video" || mediaType !== "image,video" ||
-                    mediaType.includes("audio")) && (
+                  {((searchValue === "" && mediaType === "image") || mediaType.includes("audio")) && (
                       <AudioRender
                         photo={photo}
                         wrapperStyle={wrapperStyle}

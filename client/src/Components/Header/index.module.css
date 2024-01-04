@@ -33,6 +33,11 @@
   color: white;
 }
 
+.searchInput {
+  background-color: #4c4d53;
+  color: white;
+}
+
 @media only screen and (max-width: 1024px) {
   .hdImgStyle {
     max-width: -webkit-fill-available;
