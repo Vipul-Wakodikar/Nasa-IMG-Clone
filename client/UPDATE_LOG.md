@@ -46,3 +46,11 @@
 5. users can now view image, video or audio at once in homepage 
 6. Added security features where secret key is now hidden in source and in network tab
 7. Integrated both client and server using concurrently package
+
+# Version 1.4
+
+1. Added Footer and is responsive
+2. Added Logo and Information in Header and is now responsive
+3. Display message if no results were found
+4. fix the issue if the results is not found than user is not able to make new search
+5. fixed multiple network call in network tab by implementing style directly on PhotoAlbum in MasonaryLayout Component

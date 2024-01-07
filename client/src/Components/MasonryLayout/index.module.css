@@ -67,6 +67,12 @@
   display: none !important;
 }
 
+.noResults {
+  color: white;
+  display: grid;
+  justify-content: center;
+}
+
 @media only screen and (max-width: 1024px) {
   .hdImgStyle {
     max-width: -webkit-fill-available;

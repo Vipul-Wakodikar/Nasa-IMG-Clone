@@ -38,6 +38,15 @@
   color: white;
 }
 
+.nasaLogo {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  justify-content: center;
+  align-items: center;
+  color: white;
+  padding-bottom: 10px;
+}
+
 @media only screen and (max-width: 1024px) {
   .hdImgStyle {
     max-width: -webkit-fill-available;

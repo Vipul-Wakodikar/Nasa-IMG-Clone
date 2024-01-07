@@ -7,11 +7,12 @@ import { useSelector } from "react-redux";
 import AudioRender from "./AudioRender";
 import notFound from "../../assets/Image404NotFound.jpg";
 
-const MasonLayout = ({ url }) => {
+const MasonLayout = ({ url, popular }) => {
   const [recentData, setRecentData] = useState([]);
   const [displayData, setDisplayData] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [modalData, setModalData] = useState(null);
+  const [noResults, setNoResults] = useState(false);
 
   const mediaType = useSelector((state) => state.mediaType.value);
   const searchValue = useSelector((state) => state.data.value);
@@ -36,18 +37,25 @@ const MasonLayout = ({ url }) => {
 
   useEffect(() => {
     fetchData();
-  }, [url, mediaType]);
+    setNoResults(false);
+  }, [url, mediaType, searchValue]);
 
   function filterNonImageData() {
     // get the items array from the recentData object, or use an empty array if it is undefined
     const itemsArray = recentData?.collection?.items || [];
+
+    if (recentData?.collection?.metadata?.total_hits === 0) {
+      setNoResults(true);
+    } else {
+      setNoResults(false);
+    }
     // filter the items array by removing the elements that have the same href value as their links[0].href value
     const hrefArray = itemsArray.map((item) => ({
       ...item,
       src:
         item.data[0].media_type === "audio"
           ? "https://images.nasa.gov/images/search_audio-icon.png?as=webp"
-          : (item.links[0].href || notFound),
+          : item.links[0].href || notFound,
     }));
     return hrefArray;
   }
@@ -64,65 +72,75 @@ const MasonLayout = ({ url }) => {
 
   return (
     <>
-      <PhotoAlbum
-        layout="masonry"
-        photos={displayData}
-        renderPhoto={({ photo, wrapperStyle, renderDefaultPhoto }) => {
-          return (
-            <>
-              {photo.data[0].media_type !== "audio" ? (
-                <button
-                  className={`${style.cardButtonStyle} ${photo.src === "hide" && style.hideButton}`}
-                  onClick={() => {
-                    if (JSON.stringify(modalData) !== JSON.stringify(photo)) {
-                      openCardModal(photo || null);
-                    }
-                  }}
-                  style={wrapperStyle}
-                >
-                  {/* {renderDefaultPhoto({ wrapped: true })} */}
-                  {photo.data[0].media_type === "video" && (
-                    <div
-                      className={
-                        photo.data[0].media_type === "video" && style.vidOverlay
-                      }
-                      style={wrapperStyle}
-                    />
-                  )}
-                  {photo.src && (<img
-                    src={photo.src}
-                    alt={photo.data[0].title || "Error"}
-                    style={wrapperStyle}
-                    onError={(e) => {
-                      if (e.target.status === 403) {
-                        // Handle the 403 error here, e.g., replace the image
-                        e.target.src = notFound;
-                      }
-                    }}
-                  />)}
-                </button>
-              ) : (
+      {noResults ? (
+        <h1 className={style.noResults}>
+          Based on your selections, no results were found.
+        </h1>
+      ) : (
+        <>
+          <PhotoAlbum
+            layout="masonry"
+            photos={displayData}
+            renderPhoto={({ photo, wrapperStyle, renderDefaultPhoto }) => {
+              return (
                 <>
-                  {((searchValue === "" && mediaType === "image") || mediaType.includes("audio")) && (
-                      <AudioRender
-                        photo={photo}
-                        wrapperStyle={wrapperStyle}
-                        keyId={photo.data[0].nasa_id}
-                      />
-                    )}
+                  {photo.data[0].media_type !== "audio" ? (
+                    <button
+                      className={`${style.cardButtonStyle} ${
+                        photo.src === "hide" && style.hideButton
+                      }`}
+                      onClick={() => {
+                        if (
+                          JSON.stringify(modalData) !== JSON.stringify(photo)
+                        ) {
+                          openCardModal(photo || null);
+                        }
+                      }}
+                      style={popular ? {display: "none"} : wrapperStyle}
+                    >
+                      {/* {renderDefaultPhoto({ wrapped: true })} */}
+                      {photo.data[0].media_type === "video" && (
+                        <div
+                          className={
+                            photo.data[0].media_type === "video" &&
+                            style.vidOverlay
+                          }
+                          style={wrapperStyle}
+                        />
+                      )}
+                      {photo.src && (
+                        <img
+                          src={photo.src}
+                          alt={photo.data[0].title || "Error"}
+                          style={wrapperStyle}
+                        />
+                      )}
+                    </button>
+                  ) : (
+                    <>
+                      {((searchValue === "" && mediaType === "image") ||
+                        mediaType.includes("audio")) && (
+                        <AudioRender
+                          photo={photo}
+                          wrapperStyle={wrapperStyle}
+                          keyId={photo.data[0].nasa_id}
+                        />
+                      )}
+                    </>
+                  )}
                 </>
-              )}
-            </>
-          );
-        }}
-      />
-      {openModal && modalData && !mediaType.includes("audio") && (
-        <Modal
-          isOpen={openModal}
-          data={modalData}
-          onClose={handleCloseModal}
-          appElement={document.getElementById("root")}
-        />
+              );
+            }}
+          />
+          {openModal && modalData && !mediaType.includes("audio") && (
+            <Modal
+              isOpen={openModal}
+              data={modalData}
+              onClose={handleCloseModal}
+              appElement={document.getElementById("root")}
+            />
+          )}
+        </>
       )}
     </>
   );

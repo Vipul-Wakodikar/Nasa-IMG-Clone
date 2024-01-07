@@ -4,6 +4,7 @@ import HeaderModal from "./HeaderModal";
 import { useSelector, useDispatch } from "react-redux";
 import { updateSearch } from "../../features/data/dataSlice";
 import { setMediaType } from "../../features/data/mediaTypeSlice";
+import NasaLogo from "../../Containers/Logo";
 
 const Header = () => {
   const [cardData, setCardData] = useState([]);
@@ -84,10 +85,22 @@ const Header = () => {
     );
   };
 
+  const RenderLogoInfo = () => (
+    <div className={style.nasaLogo}>
+      <div>
+        <NasaLogo />
+      </div>
+      <div>
+        <strong>NASA Image and <br />Video Library</strong>
+      </div>
+    </div>
+  );
+
   return (
     <>
       <header className={`${style.header} ${style.headerBackground}`}>
         <div>
+          <RenderLogoInfo />
           <div className={style.searchBar}>
             <input
               type="text"
