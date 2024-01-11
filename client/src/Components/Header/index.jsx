@@ -15,7 +15,7 @@ const Header = () => {
 
   const dispatch = useDispatch();
   const searchValue = useSelector((state) => state.data.value);
-
+  const mediaTypes = useSelector((state) => state.mediaType.value);
   const fetchData = async () => {
     // const api_url = await fetch(
     //   `${import.meta.env.VITE_APOD_APIURL}${
@@ -41,50 +41,103 @@ const Header = () => {
     setModalData(null); // Reset modal data
   };
 
-  const RadioMediaButtons = () => {
-    const handleMediaChange = (event) => {
-      setSelectMediaType(event.target.value); // Update local state
-      dispatch(setMediaType({ mediaType: event.target.value })); // Dispatch action with selected media type
-    };
+  // const RadioMediaButtons = () => {
+  //   const handleMediaChange = (event) => {
+  //     setSelectMediaType(event.target.value); // Update local state
+  //     dispatch(setMediaType({ mediaType: event.target.value })); // Dispatch action with selected media type
+  //   };
 
+  //   return (
+  //     <div className={style.mediaType}>
+  //       <label>
+  //         <input
+  //           type="radio"
+  //           name="mediaType"
+  //           value="image"
+  //           checked={selectMediaType === "image"}
+  //           onChange={handleMediaChange}
+  //         />
+  //         Image
+  //       </label>
+
+  //       <label>
+  //         <input
+  //           type="radio"
+  //           name="mediaType"
+  //           value="video"
+  //           checked={selectMediaType === "video"}
+  //           onChange={handleMediaChange}
+  //         />
+  //         Video
+  //       </label>
+
+  //       <label>
+  //         <input
+  //           type="radio"
+  //           name="mediaType"
+  //           value="audio"
+  //           checked={selectMediaType === "audio"}
+  //           onChange={handleMediaChange}
+  //         />
+  //         Audio
+  //       </label>
+  //     </div>
+  //   );
+  // };
+
+  const CheckboxMediaButtons = () => {
+
+    const handleMediaChange = (selectedMediaType) => {
+      const selectedMediaTypes = mediaTypes.split(',');
+      const index = selectedMediaTypes.indexOf(selectedMediaType);
+  
+      if (index !== -1) {
+        // Remove the selected media type if already present
+        selectedMediaTypes.splice(index, 1);
+      } else {
+        // Add the selected media type if not present
+        selectedMediaTypes.push(selectedMediaType);
+      }
+  
+      const newMediaType = selectedMediaTypes.join(',');
+      dispatch(setMediaType({ mediaType: newMediaType }));
+    };
+  
     return (
       <div className={style.mediaType}>
         <label>
           <input
-            type="radio"
-            name="mediaType"
+            type="checkbox"
             value="image"
-            checked={selectMediaType === "image"}
-            onChange={handleMediaChange}
+            checked={mediaTypes.includes('image')}
+            onChange={() => handleMediaChange('image')}
           />
           Image
         </label>
-
+  
         <label>
           <input
-            type="radio"
-            name="mediaType"
+            type="checkbox"
             value="video"
-            checked={selectMediaType === "video"}
-            onChange={handleMediaChange}
+            checked={mediaTypes.includes('video')}
+            onChange={() => handleMediaChange('video')}
           />
           Video
         </label>
-
+  
         <label>
           <input
-            type="radio"
-            name="mediaType"
+            type="checkbox"
             value="audio"
-            checked={selectMediaType === "audio"}
-            onChange={handleMediaChange}
+            checked={mediaTypes.includes('audio')}
+            onChange={() => handleMediaChange('audio')}
           />
           Audio
         </label>
       </div>
     );
   };
-
+  
   const RenderLogoInfo = () => (
     <div className={style.nasaLogo}>
       <div>
@@ -128,7 +181,8 @@ const Header = () => {
             <button onClick={() => openCardModal(cardData)} className={style.mediaType}>
               Picture of the day
             </button>
-            <RadioMediaButtons />
+            {/* <RadioMediaButtons /> */}
+            <CheckboxMediaButtons />
           </div>
         </div>
         <HeaderModal

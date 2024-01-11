@@ -19,7 +19,7 @@ const AudioRender = ({ photo, wrapperStyle, keyId }) => {
 
   return (
     <>
-    {photo.data[0].media_type === "audio" && (<div style={wrapperStyle} key={keyId}>
+    {photo.data[0].media_type.includes("audio") && (<div style={wrapperStyle} key={keyId}>
       <div className={style.audioImageStyle}>
         <img
           src="https://images.nasa.gov/images/search_audio-icon.png?as=webp"

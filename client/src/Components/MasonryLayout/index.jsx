@@ -53,7 +53,7 @@ const MasonLayout = ({ url, popular }) => {
     const hrefArray = itemsArray.map((item) => ({
       ...item,
       src:
-        item.data[0].media_type === "audio"
+        item.data[0].media_type.includes("audio")
           ? "https://images.nasa.gov/images/search_audio-icon.png?as=webp"
           : item.links[0].href || notFound,
     }));
@@ -99,10 +99,10 @@ const MasonLayout = ({ url, popular }) => {
                       style={popular ? {display: "none"} : wrapperStyle}
                     >
                       {/* {renderDefaultPhoto({ wrapped: true })} */}
-                      {photo.data[0].media_type === "video" && (
+                      {photo.data[0].media_type.includes("video") && (
                         <div
                           className={
-                            photo.data[0].media_type === "video" &&
+                            photo.data[0].media_type.includes("video") &&
                             style.vidOverlay
                           }
                           style={wrapperStyle}
@@ -132,7 +132,7 @@ const MasonLayout = ({ url, popular }) => {
               );
             }}
           />
-          {openModal && modalData && !mediaType.includes("audio") && (
+          {openModal && modalData && (
             <Modal
               isOpen={openModal}
               data={modalData}

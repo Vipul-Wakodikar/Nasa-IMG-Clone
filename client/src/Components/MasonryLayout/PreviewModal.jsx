@@ -4,8 +4,8 @@ import ReactModal from "react-modal";
 
 const customStyles = {
   content: {
-    backgroundColor: '#26282f',
-    color: 'white',
+    backgroundColor: "#26282f",
+    color: "white",
   },
 };
 
@@ -45,10 +45,19 @@ const PreviewModal = ({ isOpen, data, onClose, appElement, key }) => {
             <h3>{data.data[0].title}</h3>
             <p>Date Created: {data.data[0].date_created || "Not Found"}</p>
             <p>Nasa Id: {data.data[0].nasa_id || "Not Found"}</p>
-            {data.data[0].keywords &&
-              data.data[0].keywords.map((keyword) => (
-                <div key={keyword}>{keyword}</div> // Use keyword as unique key for keyword divs
-              ))}
+            keyword:
+            <ul className={style.unList}>
+              {data.data[0].keywords &&
+                data.data[0].keywords.map((keyword) => (
+                  <li key={keyword} className={style.keyWordList}>
+                    {keyword}
+                    {data.data[0].keywords[data.data[0].keywords.length - 1] ===
+                    keyword
+                      ? "."
+                      : ","}{" "}
+                  </li> // Use keyword as unique key for keyword divs
+                ))}
+            </ul>
             <p
               dangerouslySetInnerHTML={{
                 __html: `${data.data[0].description || "Not Found"}`,
@@ -74,10 +83,20 @@ const PreviewModal = ({ isOpen, data, onClose, appElement, key }) => {
               <h3>{data.data[0].title}</h3>
               <p>Date Created: {data.data[0].date_created || "Not Found"}</p>
               <p>Nasa Id: {data.data[0].nasa_id || "Not Found"}</p>
-              {data.data[0].keywords &&
-                data.data[0].keywords.map((keyword) => (
-                  <div key={keyword}>{keyword}</div> // Use keyword as unique key for keyword divs
-                ))}
+              {data.data[0].keywords  && <p>Keyword:</p>}
+              <ul className={style.unList}>
+                {data.data[0].keywords &&
+                  data.data[0].keywords.map((keyword) => (
+                    <li key={keyword} className={style.keyWordList}>
+                      {keyword}
+                      {data.data[0].keywords[
+                        data.data[0].keywords.length - 1
+                      ] === keyword
+                        ? "."
+                        : ","}{" "}
+                    </li> // Use keyword as unique key for keyword divs
+                  ))}
+              </ul>
               <p
                 dangerouslySetInnerHTML={{
                   __html: `${data.data[0].description || "Not Found"}`,

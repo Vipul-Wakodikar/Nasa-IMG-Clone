@@ -54,3 +54,6 @@
 3. Display message if no results were found
 4. fix the issue if the results is not found than user is not able to make new search
 5. fixed multiple network call in network tab by implementing style directly on PhotoAlbum in MasonaryLayout Component
+6. Fixed false warning emerging on console on every render
+7. Change the mediaType selection from radio buttons to checkbox
+8. Fixed how the keyword will be displayed within modal

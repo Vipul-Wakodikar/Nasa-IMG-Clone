@@ -7,7 +7,7 @@ const mediaTypes = {
 };
 
 const initialState = {
-  value: mediaTypes.IMAGE,
+  value: 'image,video,audio', // Set the default value
 };
 
 export const mediaTypeSlice = createSlice({
@@ -15,19 +15,18 @@ export const mediaTypeSlice = createSlice({
   initialState,
   reducers: {
     setMediaType: (state, action) => {
-        const { mediaType } = action.payload;
-        if (!Object.values(mediaTypes).includes(mediaType)) {
-          throw new Error(`Invalid media type: ${mediaType}`);
-        }
-        // Create a copy of the state
-        const newState = { ...state };
-  
-        // Update the value property
-        newState.value = mediaType;
-  
-        // Return the updated state
-        return newState;
-      },
+      const { mediaType } = action.payload;
+      // Validate the selected media types if needed
+
+      // Create a copy of the state
+      const newState = { ...state };
+
+      // Update the value property
+      newState.value = mediaType;
+
+      // Return the updated state
+      return newState;
+    },
   },
 });
 

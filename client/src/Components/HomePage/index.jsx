@@ -9,14 +9,14 @@ const HomePage = () => {
     <div className={style.buttonContainer}>
       <button
         onClick={() => setIsPopular(false)}
-        className={!isPopular && style.activeButton}
+        className={!isPopular ? style.activeButton : ""}
         autoFocus
       >
         Newest Uploads
       </button>
       <button
         onClick={() => setIsPopular(true)}
-        className={isPopular && style.activeButton}
+        className={isPopular ? style.activeButton : ""}
       >
         Trending & Popular
       </button>
