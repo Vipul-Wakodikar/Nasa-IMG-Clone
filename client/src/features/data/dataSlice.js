@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   value: "",
+  totalHits: "",
 }
 
 export const counterSlice = createSlice({
@@ -18,10 +19,15 @@ export const counterSlice = createSlice({
       // Return the updated state
       return newState;
     },
+    updateTotalHits: (state, action) => {
+      const newState = {...state}
+      newState.totalHits = action.payload
+      return newState
+    },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { updateSearch } = counterSlice.actions
+export const { updateSearch, updateTotalHits } = counterSlice.actions
 
 export default counterSlice.reducer

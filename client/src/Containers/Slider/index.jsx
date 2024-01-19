@@ -1,109 +1,96 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState, useRef } from "react";
+import classnames from "classnames";
+import PropTypes from "prop-types";
+import "./multiRangeSlider.css";
 
-const Slider = ({ min, max, value1, value2, onChange1, onChange2 }) => {
-  const [thumbPosition1, setThumbPosition1] = useState({
-    left: value1 / (max - min) * 100,
-  });
-  const [thumbPosition2, setThumbPosition2] = useState({
-    right: (max - value2) / (max - min) * 100,
-  });
+const MultiRangeSlider = ({ min, max, onChange }) => {
+  const [minVal, setMinVal] = useState(min);
+  const [maxVal, setMaxVal] = useState(max);
+  const minValRef = useRef(null);
+  const maxValRef = useRef(null);
+  const range = useRef(null);
 
-  const handleDragStart1 = (event) => {
-    event.preventDefault();
-    const touch = event.touches ? event.touches[0] : event;
-    document.addEventListener('touchmove', handleDrag1, { passive: true });
-    document.addEventListener('mouseup', handleDragEnd1);
-    document.addEventListener('touchend', handleDragEnd1);
-    handleDrag1({ clientX: touch.clientX });
-  };
+  // Convert to percentage
+  const getPercent = useCallback(
+    (value) => Math.round(((value - min) / (max - min)) * 100),
+    [min, max]
+  );
 
-  const handleDrag1 = (event) => {
-    const newLeft = Math.max(
-      0,
-      Math.min(100 - thumbPosition2.right, event.clientX / document.body.clientWidth * 100)
-    );
-    setThumbPosition1({ left: newLeft });
-    onChange1(Math.round((newLeft * (max - min)) / 100));
-  };
+  // Set width of the range to decrease from the left side
+  useEffect(() => {
+    if (maxValRef.current) {
+      const minPercent = getPercent(minVal);
+      const maxPercent = getPercent(+maxValRef.current.value); // Preceding with '+' converts the value from type string to type number
 
-  const handleDragEnd1 = () => {
-    document.removeEventListener('touchmove', handleDrag1);
-    document.removeEventListener('mouseup', handleDragEnd1);
-  };
+      if (range.current) {
+        range.current.style.left = `${minPercent}%`;
+        range.current.style.width = `${maxPercent - minPercent}%`;
+      }
+    }
+  }, [minVal, getPercent]);
 
-  const handleDragStart2 = (event) => {
-    event.preventDefault();
-    const touch = event.touches ? event.touches[0] : event;
-    document.addEventListener('touchmove', handleDrag2, { passive: true });
-    document.addEventListener('mouseup', handleDragEnd2);
-    document.addEventListener('touchend', handleDragEnd2);
-    handleDrag2({ clientX: touch.clientX });
-  };
+  // Set width of the range to decrease from the right side
+  useEffect(() => {
+    if (minValRef.current) {
+      const minPercent = getPercent(+minValRef.current.value);
+      const maxPercent = getPercent(maxVal);
 
-  const handleDrag2 = (event) => {
-    const newRight = Math.max(
-      thumbPosition1.left,
-      Math.min(100, 100 - event.clientX / document.body.clientWidth * 100)
-    );
-    setThumbPosition2({ right: newRight });
-    onChange2(Math.round((max - newRight * (max - min)) / 100));
-  };
+      if (range.current) {
+        range.current.style.width = `${maxPercent - minPercent}%`;
+      }
+    }
+  }, [maxVal, getPercent]);
 
-  const handleDragEnd2 = () => {
-    document.removeEventListener('touchmove', handleDrag2);
-    document.removeEventListener('mouseup', handleDragEnd2);
-  };
-
-  const style = {
-    width: '100%',
-    height: '20px',
-    backgroundColor: '#ddd',
-    borderRadius: '5px',
-    position: 'relative',
-  };
-
-  const thumbStyle = {
-    position: 'absolute',
-    top: 0,
-    width: '20px',
-    height: '20px',
-    borderRadius: '50%',
-    backgroundColor: '#333',
-    cursor: 'pointer',
-  };
+  // Get min and max values when their state changes
+  useEffect(() => {
+    onChange({ min: minVal, max: maxVal });
+  }, [minVal, maxVal, onChange]);
 
   return (
-    <div style={style}>
-      <div style={{ ...thumbStyle, left: `${thumbPosition1.left}%` }} onMouseDown={handleDragStart1} onTouchStart={handleDragStart1} />
-      <div style={{ ...thumbStyle, right: `${thumbPosition2.right}%` }} onMouseDown={handleDragStart2} onTouchStart={handleDragStart2} />
+    <div className="container">
+      <input
+        type="range"
+        min={min}
+        max={max}
+        value={minVal}
+        ref={minValRef}
+        onChange={(event) => {
+          const value = Math.min(+event.target.value, maxVal - 1);
+          setMinVal(value);
+          event.target.value = value.toString();
+        }}
+        className={classnames("thumb thumb--zindex-3", {
+          "thumb--zindex-5": minVal > max - 100
+        })}
+      />
+      <input
+        type="range"
+        min={min}
+        max={max}
+        value={maxVal}
+        ref={maxValRef}
+        onChange={(event) => {
+          const value = Math.max(+event.target.value, minVal + 1);
+          setMaxVal(value);
+          event.target.value = value.toString();
+        }}
+        className="thumb thumb--zindex-4"
+      />
+
+      <div className="slider">
+        <div className="slider__track" />
+        <div ref={range} className="slider__range" />
+        <div className="slider__left-value">{minVal}</div>
+        <div className="slider__right-value">{maxVal}</div>
+      </div>
     </div>
   );
 };
 
-export default function Sliders() {
-  const [currentValue1, setCurrentValue1] = useState(50);
-  const [currentValue2, setCurrentValue2] = useState(75);
+MultiRangeSlider.propTypes = {
+  min: PropTypes.number.isRequired,
+  max: PropTypes.number.isRequired,
+  onChange: PropTypes.func.isRequired
+};
 
-  const handleChange1 = (newValue) => {
-    setCurrentValue1(newValue);
-  };
-
-  const handleChange2 = (newValue) => {
-    setCurrentValue2(newValue);
-  };
-
-  return (
-    <div>
-      <h2>Current Value 1: {Math.round(currentValue1)}</h2>
-      <h2>Current Value 2: {Math.round(currentValue2)}</h2>
-      <Slider
-        min={0}
-        max={100}
-        value1={currentValue1}
-        value2={currentValue2}
-        onChange1={handleChange1}
-        onChange2={handleChange2}
-      />
-    </div>
-  );
-}
+export default MultiRangeSlider;

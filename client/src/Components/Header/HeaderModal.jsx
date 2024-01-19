@@ -27,6 +27,7 @@ const HeaderModal = ({ isOpen, data, onClose, appElement }) => {
               <h3>{data.title}</h3>
               <p>Date Created: {data.date || "Not Found"}</p>
               <p>Description: {data.explanation || "Not Found"}</p>
+              <p>Copy right: {data.copyright || "Not Available"}</p>
             </div>
           </>
         )}

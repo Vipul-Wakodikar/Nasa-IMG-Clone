@@ -1,7 +1,7 @@
 import HomePage from "./Components/HomePage";
 import { useSelector } from "react-redux";
 import SearchedPage from "./Components/SearchedPage";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import NotFound from "./Components/NotFound";
 import Header from "./Components/Header";
 
@@ -24,7 +24,8 @@ function App() {
         /> */}
         <Route path="test" element={<Test />} />
         <Route path="test2" element={<Test2 />} />
-        <Route path="*" element={<NotFound />} />
+        {/* <Route path="*" element={<NotFound />} /> */}
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       <Footer />
     </>

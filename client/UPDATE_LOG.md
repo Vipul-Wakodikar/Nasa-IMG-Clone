@@ -57,3 +57,13 @@
 6. Fixed false warning emerging on console on every render
 7. Change the mediaType selection from radio buttons to checkbox
 8. Fixed how the keyword will be displayed within modal
+
+# Version 1.5
+
+1. Created new pagination feature if user search any data
+2. Added styles to path navigation
+3. Cleanup code for previewModal
+4. Added next and previous button in searchData if total hits on search are above 100
+5. Redirect "*" path to "/"  
+6. Added Copy right: in apod
+7. Modified  text size and padding of trending buttons in homePage

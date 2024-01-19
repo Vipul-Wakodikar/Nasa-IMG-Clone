@@ -1,0 +1,27 @@
+.asideDimensions {
+    margin: 10px;
+    display: grid;
+    justify-content: center;
+}
+
+.searchedPage {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+}
+
+.infoText {
+    background-color: #40444b;
+    color: #fff;
+    font-family: "Sunflower",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0;
+    padding: 8px 10px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.rangeSlider {
+    padding: 10px 10px;
+    z-index: 0;
+}

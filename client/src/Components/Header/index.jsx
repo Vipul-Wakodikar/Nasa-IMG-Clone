@@ -11,7 +11,7 @@ const Header = () => {
   const [openModal, setOpenModal] = useState(false);
   const [modalData, setModalData] = useState(null); // Store data for modal
   const [searchData, setSearchData] = useState("random");
-  const [selectMediaType, setSelectMediaType] = useState("image");
+  // const [selectMediaType, setSelectMediaType] = useState("image");
 
   const dispatch = useDispatch();
   const searchValue = useSelector((state) => state.data.value);

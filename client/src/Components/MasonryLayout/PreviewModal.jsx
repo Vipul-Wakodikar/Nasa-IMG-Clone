@@ -27,6 +27,34 @@ const PreviewModal = ({ isOpen, data, onClose, appElement, key }) => {
   }, [data, data.href]); // Update only when data changes
   if (!isOpen) return null;
 
+  const DisplayData = () => (
+    <>
+      <div key={data.data[0].nasa_id}>
+        <h3>{data.data[0].title}</h3>
+        <p>Date Created: {data.data[0].date_created || "Not Found"}</p>
+        <p>Nasa Id: {data.data[0].nasa_id || "Not Found"}</p>
+        {data.data[0].keywords && <p>Keyword:</p>}
+        <ul className={style.unList}>
+          {data.data[0].keywords &&
+            data.data[0].keywords.map((keyword) => (
+              <li key={keyword} className={style.keyWordList}>
+                {keyword}
+                {data.data[0].keywords[data.data[0].keywords.length - 1] ===
+                keyword
+                  ? "."
+                  : ","}{" "}
+              </li> // Use keyword as unique key for keyword divs
+            ))}
+        </ul>
+        <p
+          dangerouslySetInnerHTML={{
+            __html: `${data.data[0].description || "Not Found"}`,
+          }}
+        />
+      </div>
+    </>
+  );
+
   const RenderVideoData = () => (
     <>
       {vidData && (
@@ -41,29 +69,7 @@ const PreviewModal = ({ isOpen, data, onClose, appElement, key }) => {
               Your browser does not support the video tag.
             </video>
           </div>
-          <div key={data.data[0].nasa_id}>
-            <h3>{data.data[0].title}</h3>
-            <p>Date Created: {data.data[0].date_created || "Not Found"}</p>
-            <p>Nasa Id: {data.data[0].nasa_id || "Not Found"}</p>
-            keyword:
-            <ul className={style.unList}>
-              {data.data[0].keywords &&
-                data.data[0].keywords.map((keyword) => (
-                  <li key={keyword} className={style.keyWordList}>
-                    {keyword}
-                    {data.data[0].keywords[data.data[0].keywords.length - 1] ===
-                    keyword
-                      ? "."
-                      : ","}{" "}
-                  </li> // Use keyword as unique key for keyword divs
-                ))}
-            </ul>
-            <p
-              dangerouslySetInnerHTML={{
-                __html: `${data.data[0].description || "Not Found"}`,
-              }}
-            />
-          </div>
+          <DisplayData />
         </div>
       )}
     </>
@@ -79,30 +85,7 @@ const PreviewModal = ({ isOpen, data, onClose, appElement, key }) => {
               alt={data.data[0].title}
               className={style.hdImgStyle}
             />
-            <div key={data.data[0].nasa_id}>
-              <h3>{data.data[0].title}</h3>
-              <p>Date Created: {data.data[0].date_created || "Not Found"}</p>
-              <p>Nasa Id: {data.data[0].nasa_id || "Not Found"}</p>
-              {data.data[0].keywords  && <p>Keyword:</p>}
-              <ul className={style.unList}>
-                {data.data[0].keywords &&
-                  data.data[0].keywords.map((keyword) => (
-                    <li key={keyword} className={style.keyWordList}>
-                      {keyword}
-                      {data.data[0].keywords[
-                        data.data[0].keywords.length - 1
-                      ] === keyword
-                        ? "."
-                        : ","}{" "}
-                    </li> // Use keyword as unique key for keyword divs
-                  ))}
-              </ul>
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: `${data.data[0].description || "Not Found"}`,
-                }}
-              />
-            </div>
+            <DisplayData />
           </div>
         </>
       )}

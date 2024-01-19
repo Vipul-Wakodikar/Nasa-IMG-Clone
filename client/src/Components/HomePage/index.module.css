@@ -19,6 +19,9 @@
     border:none;
     margin: 5px;
     padding: 7px 15px;
+    font-weight: 500;
+    font-size: 21px;
+    border-radius: 10px;
   }
 
   .activeButton {
