@@ -67,3 +67,10 @@
 5. Redirect "*" path to "/"  
 6. Added Copy right: in apod
 7. Modified  text size and padding of trending buttons in homePage
+8. solved undesired gap in homepage occurred due to 403 access
+
+## Before
+![Alt text](<undesired gaps.PNG>)
+
+## Now
+![Alt text](image-2.png)

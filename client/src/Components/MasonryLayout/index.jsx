@@ -81,12 +81,14 @@ const MasonLayout = ({ url, popular }) => {
     noResults && dispatch(updateTotalHits(0));
   }, [recentData, url, noResults]);
 
+  const filterHideSrc = displayData.filter(display => display.src !== "hide")
+
   const RenderPhotoAlbum = () => {
     return (
       <>
         <PhotoAlbum
           layout="masonry"
-          photos={displayData}
+          photos={filterHideSrc}
           renderPhoto={({ photo, wrapperStyle, renderDefaultPhoto }) => {
             return (
               <>

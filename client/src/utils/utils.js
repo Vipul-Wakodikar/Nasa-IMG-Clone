@@ -12,9 +12,10 @@ export function addImageHeight(array) {
         // add an onload event handler
         img.onload = function () {
           // get the natural height and width of the image
-          let height = img.naturalHeight || 200;
-          let width = img.naturalWidth || 200;
+          let height = img.naturalHeight || 0;
+          let width = img.naturalWidth || 0;
           // create a copy of the object and add the height and width properties
+          // let newObj = { ...obj, height, width };
           let newObj = { ...obj, height, width };
           // resolve the promise with the new object
           resolve(newObj);
