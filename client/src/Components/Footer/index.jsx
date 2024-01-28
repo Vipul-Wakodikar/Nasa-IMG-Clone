@@ -41,18 +41,18 @@ const Footer = () => {
 
   const RenderLinks = () => (
     <>
-      <div>
+      <nav>
         <ul className={style.ulStyle}>
           {LinksData &&
             LinksData.map((data) => (
-              <li key={data.name}>
-                <a href={data.url} target="_blank">
+              <li key={data.url}>
+                <a href={data.url} target="_blank"  rel="noopener noreferrer">
                   {data.name}
                 </a>
               </li>
             ))}
         </ul>
-      </div>
+      </nav>
     </>
   );
 

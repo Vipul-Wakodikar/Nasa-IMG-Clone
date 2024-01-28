@@ -74,3 +74,13 @@
 
 ## Now
 ![Alt text](image-2.png)
+
+# Version 1.6
+
+1. Added  rel="noopener noreferrer" to protect external link from malicious attempt and vulnerability.
+
+2. remove redundant code from Header
+
+3. Added new parameters to display in Modal e.g. photographer, location etc.
+
+4. Added loading="lazy" as attributes on every images

@@ -33,6 +33,11 @@
   color: white;
 }
 
+.searchButton {
+  background-color: #15418c;
+  color: white;
+}
+
 .searchInput {
   background-color: #4c4d53;
   color: white;

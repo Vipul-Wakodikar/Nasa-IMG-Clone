@@ -21,7 +21,7 @@ const HeaderModal = ({ isOpen, data, onClose, appElement }) => {
         {data && (
           <>
             <div>
-              <img src={data.hdurl || notFound} alt={data.title} className={style.hdImgStyle} />
+              <img src={data.hdurl || notFound} alt={data.title} className={style.hdImgStyle} loading="lazy" />
             </div>
             <div>
               <h3>{data.title}</h3>

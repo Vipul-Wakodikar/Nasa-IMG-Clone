@@ -23,7 +23,8 @@ const AudioRender = ({ photo, wrapperStyle, keyId }) => {
       <div className={style.audioImageStyle}>
         <img
           src="https://images.nasa.gov/images/search_audio-icon.png?as=webp"
-          alt=""
+          alt="audio-icon"
+          loading="lazy"
         />
       </div>
       <audio className={style.audioWidth} controls>

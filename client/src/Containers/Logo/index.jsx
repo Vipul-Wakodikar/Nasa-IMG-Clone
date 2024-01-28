@@ -11,8 +11,9 @@ const NasaLogo = () => {
             notFoundImage
           }
           alt="logo"
-          width={107}
-          height={86}
+          // width={107}
+          // height={86}
+          loading="lazy"
         />
       </a>
     </>

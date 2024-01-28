@@ -41,56 +41,11 @@ const Header = () => {
     setModalData(null); // Reset modal data
   };
 
-  // const RadioMediaButtons = () => {
-  //   const handleMediaChange = (event) => {
-  //     setSelectMediaType(event.target.value); // Update local state
-  //     dispatch(setMediaType({ mediaType: event.target.value })); // Dispatch action with selected media type
-  //   };
-
-  //   return (
-  //     <div className={style.mediaType}>
-  //       <label>
-  //         <input
-  //           type="radio"
-  //           name="mediaType"
-  //           value="image"
-  //           checked={selectMediaType === "image"}
-  //           onChange={handleMediaChange}
-  //         />
-  //         Image
-  //       </label>
-
-  //       <label>
-  //         <input
-  //           type="radio"
-  //           name="mediaType"
-  //           value="video"
-  //           checked={selectMediaType === "video"}
-  //           onChange={handleMediaChange}
-  //         />
-  //         Video
-  //       </label>
-
-  //       <label>
-  //         <input
-  //           type="radio"
-  //           name="mediaType"
-  //           value="audio"
-  //           checked={selectMediaType === "audio"}
-  //           onChange={handleMediaChange}
-  //         />
-  //         Audio
-  //       </label>
-  //     </div>
-  //   );
-  // };
-
   const CheckboxMediaButtons = () => {
-
     const handleMediaChange = (selectedMediaType) => {
-      const selectedMediaTypes = mediaTypes.split(',');
+      const selectedMediaTypes = mediaTypes.split(",");
       const index = selectedMediaTypes.indexOf(selectedMediaType);
-  
+
       if (index !== -1) {
         // Remove the selected media type if already present
         selectedMediaTypes.splice(index, 1);
@@ -98,56 +53,72 @@ const Header = () => {
         // Add the selected media type if not present
         selectedMediaTypes.push(selectedMediaType);
       }
-  
-      const newMediaType = selectedMediaTypes.join(',');
+
+      const newMediaType = selectedMediaTypes.join(",");
       dispatch(setMediaType({ mediaType: newMediaType }));
     };
-  
+
     return (
       <div className={style.mediaType}>
         <label>
           <input
             type="checkbox"
             value="image"
-            checked={mediaTypes.includes('image')}
-            onChange={() => handleMediaChange('image')}
+            checked={mediaTypes.includes("image")}
+            onChange={() => handleMediaChange("image")}
           />
           Image
         </label>
-  
+
         <label>
           <input
             type="checkbox"
             value="video"
-            checked={mediaTypes.includes('video')}
-            onChange={() => handleMediaChange('video')}
+            checked={mediaTypes.includes("video")}
+            onChange={() => handleMediaChange("video")}
           />
           Video
         </label>
-  
+
         <label>
           <input
             type="checkbox"
             value="audio"
-            checked={mediaTypes.includes('audio')}
-            onChange={() => handleMediaChange('audio')}
+            checked={mediaTypes.includes("audio")}
+            onChange={() => handleMediaChange("audio")}
           />
           Audio
         </label>
       </div>
     );
   };
-  
+
   const RenderLogoInfo = () => (
     <div className={style.nasaLogo}>
       <div>
         <NasaLogo />
       </div>
       <div>
-        <strong>NASA Image and <br />Video Library</strong>
+        <strong>
+          NASA Image and <br />
+          Video Library
+        </strong>
       </div>
     </div>
   );
+
+  useEffect(() => {
+    // Dynamically load the background image
+    const backgroundImage = new Image();
+    backgroundImage.src = "https://images.nasa.gov/images/landing_bg.jpg";
+
+    backgroundImage.onload = () => {
+      // Once the image is loaded, set it as the background image
+      document.querySelector(
+        ".headerBackground"
+      ).style.backgroundImage = `url(${backgroundImage.src})`;
+    };
+  }, []);
 
   return (
     <>
@@ -155,8 +126,12 @@ const Header = () => {
         <div>
           <RenderLogoInfo />
           <div className={style.searchBar}>
+            <label htmlFor="searchInput" className={style.searchLabel}>
+              Search:
+            </label>
             <input
               type="text"
+              id="searchInput"
               onChange={(e) => setSearchData(e.target.value)}
               defaultValue={searchValue}
               placeholder="Search..."
@@ -165,7 +140,8 @@ const Header = () => {
             <button
               onClick={() => dispatch(updateSearch(searchData))}
               style={{ width: "25%" }}
-              className={style.mediaType}
+              className={style.searchButton}
+              aria-label="Search"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -173,15 +149,20 @@ const Header = () => {
                 width="24"
                 viewBox="0 0 512 512"
               >
-                <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" fill="white" />
+                <path
+                  d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
+                  fill="white"
+                />
               </svg>
             </button>
           </div>
           <div className={style.header}>
-            <button onClick={() => openCardModal(cardData)} className={style.mediaType}>
+            <button
+              onClick={() => openCardModal(cardData)}
+              className={style.mediaType}
+            >
               Picture of the day
             </button>
-            {/* <RadioMediaButtons /> */}
             <CheckboxMediaButtons />
           </div>
         </div>

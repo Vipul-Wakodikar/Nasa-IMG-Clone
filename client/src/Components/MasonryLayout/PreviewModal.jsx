@@ -27,6 +27,13 @@ const PreviewModal = ({ isOpen, data, onClose, appElement, key }) => {
   }, [data, data.href]); // Update only when data changes
   if (!isOpen) return null;
 
+  const convertUrlsToLinks = (description) => {
+    const urlRegex = /(https:\/\/photojournal\.[^\s]+)/g || /(http:\/\/photojournal\.[^\s]+)/g;
+    return description.replace(urlRegex, (url) => {
+      return `<a href="${url}" target="_blank"  rel="noopener noreferrer">${url}</a>`;
+    });
+  };
+
   const DisplayData = () => (
     <>
       <div key={data.data[0].nasa_id}>
@@ -48,9 +55,13 @@ const PreviewModal = ({ isOpen, data, onClose, appElement, key }) => {
         </ul>
         <p
           dangerouslySetInnerHTML={{
-            __html: `${data.data[0].description || "Not Found"}`,
+            __html: `${convertUrlsToLinks(data.data[0].description) || "Not Found"}`,
           }}
         />
+        {data.data[0].center && <p>Center: {data.data[0].center}</p>}
+        {data.data[0].album && <p>Albums: {data.data[0].album}</p>}
+        {data.data[0].location && <p>Location: {data.data[0].location}</p>}
+        {data.data[0].photographer && <p>Photographer: {data.data[0].photographer}</p>}
       </div>
     </>
   );

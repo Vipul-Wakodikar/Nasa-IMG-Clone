@@ -27,14 +27,14 @@ const HomePage = () => {
     <>
       <TrendingButtons />
       {/* {isPopular ? (
-        <MasonLayout url="https://images-assets.nasa.gov/popular.json" />
+        <MasonLayout url="https://images-assets.nasa.gov/popular.json" popular = {!isPopular}/>
       ) : (
         <>
-          <MasonLayout url="https://images-assets.nasa.gov/recent.json" />
+          <MasonLayout url="https://images-assets.nasa.gov/recent.json" popular = {isPopular}/>
         </>
       )} */}
-      <MasonLayout url="https://images-assets.nasa.gov/popular.json" popular = {isPopular} />
-      <MasonLayout url="https://images-assets.nasa.gov/recent.json" popular = {!isPopular} />
+      <MasonLayout url="https://images-assets.nasa.gov/popular.json" popular = {!isPopular} />
+      <MasonLayout url="https://images-assets.nasa.gov/recent.json" popular = {isPopular} />
     </>
   );
 };

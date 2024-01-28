@@ -36,10 +36,14 @@ const MasonLayout = ({ url, popular }) => {
     try {
       setLoading(true); // Set loading to true while fetching data
       const recent = await fetch(url);
+      if (!recent.ok) {
+        throw new Error(`Failed to fetch data. Status: ${recent.status}`);
+      }
       const recentJson = await recent.json();
       setRecentData(recentJson);
     } catch (error) {
       console.error(error);
+      alert("Oops! Something went wrong. Please try again later.");
     } finally {
       setLoading(false); // Set loading to false when data fetching is complete
     }
@@ -119,6 +123,7 @@ const MasonLayout = ({ url, popular }) => {
                         src={photo.src}
                         alt={photo.data[0].title || "Error"}
                         style={wrapperStyle}
+                        loading="lazy"
                       />
                     )}
                   </button>
