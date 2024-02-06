@@ -91,3 +91,5 @@
 1. added margin in the Masonary layout and removed extra margins from photos
 
 2. added style to APOD button 
+
+3. entire page will now be responsive and supported on all the devices
