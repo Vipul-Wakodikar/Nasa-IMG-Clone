@@ -126,9 +126,6 @@ const Header = () => {
         <div>
           <RenderLogoInfo />
           <div className={style.searchBar}>
-            <label htmlFor="searchInput" className={style.searchLabel}>
-              Search:
-            </label>
             <input
               type="text"
               id="searchInput"

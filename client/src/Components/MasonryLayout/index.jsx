@@ -85,14 +85,22 @@ const MasonLayout = ({ url, popular }) => {
     noResults && dispatch(updateTotalHits(0));
   }, [recentData, url, noResults]);
 
-  const filterHideSrc = displayData.filter(display => display.src !== "hide")
+  const filterHideSrc = displayData.filter((display) => display.src !== "hide");
 
   const RenderPhotoAlbum = () => {
+
+    const AdjustColums = () => {
+      if (window.innerWidth > 992) return 4
+      else if (window.innerWidth < 992 && window.innerWidth > 479) return 3
+      else return 2
+    }
+
     return (
       <>
         <PhotoAlbum
           layout="masonry"
           photos={filterHideSrc}
+          columns={AdjustColums}
           renderPhoto={({ photo, wrapperStyle, renderDefaultPhoto }) => {
             return (
               <>
@@ -122,7 +130,7 @@ const MasonLayout = ({ url, popular }) => {
                       <img
                         src={photo.src}
                         alt={photo.data[0].title || "Error"}
-                        style={wrapperStyle}
+                        style={{ ...wrapperStyle, marginBottom: "12px !important" }}
                         loading="lazy"
                       />
                     )}
@@ -133,7 +141,7 @@ const MasonLayout = ({ url, popular }) => {
                       mediaType.includes("audio")) && (
                       <AudioRender
                         photo={photo}
-                        wrapperStyle={wrapperStyle}
+                        wrapperStyle={{ ...wrapperStyle, marginBottom: "12px !important" }}
                         keyId={photo.data[0].nasa_id}
                       />
                     )}
@@ -165,7 +173,9 @@ const MasonLayout = ({ url, popular }) => {
         </h1>
       ) : (
         <>
-          <RenderPhotoAlbum />
+          <div className={style.masonMargin}>
+            <RenderPhotoAlbum />
+          </div>
         </>
       )}
     </>

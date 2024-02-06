@@ -27,10 +27,9 @@ const SearchedPage = () => {
   );
 
   const CurrentPageRender = () => {
-    
     useEffect(() => {
-      if (pageNo > Math.ceil(totalHits / 100)) setPageNo(1)
-    }, [pageNo, totalHits])
+      if (pageNo > Math.ceil(totalHits / 100)) setPageNo(1);
+    }, [pageNo, totalHits]);
 
     return (
       <>
@@ -68,8 +67,10 @@ const SearchedPage = () => {
     return (
       <>
         <div>
-          <PathRender />
-          <CurrentPageRender />
+          <div style={{ marginLeft: "10%" }}>
+            <PathRender />
+            <CurrentPageRender />
+          </div>
           <MasonLayout
             url={`https://images-api.nasa.gov/search?q=${searchValue}&page=${pageNo}&media_type=${mediaType}`}
           />

@@ -81,6 +81,13 @@
 
 2. remove redundant code from Header
 
-3. Added new parameters to display in Modal e.g. photographer, location etc.
+3. Added new para meters to display in Modal e.g. photographer, location etc.
 
 4. Added loading="lazy" as attributes on every images
+
+
+# Version 1.7
+
+1. added margin in the Masonary layout and removed extra margins from photos
+
+2. added style to APOD button 

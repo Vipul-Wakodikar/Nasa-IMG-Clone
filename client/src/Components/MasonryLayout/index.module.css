@@ -88,6 +88,11 @@
   /* white-space: nowrap; */
 }
 
+.masonMargin {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
 @media only screen and (max-width: 1024px) {
   .hdImgStyle {
     max-width: -webkit-fill-available;
