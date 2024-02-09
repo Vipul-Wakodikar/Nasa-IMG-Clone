@@ -22,7 +22,7 @@ const Header = () => {
     //     import.meta.env.VITE_NASA_SECRET_KEY
     //   }`
     // );
-    const api_url = await fetch("http://localhost:5000/apod")
+    const api_url = await fetch(import.meta.env.VITE_APOD_API)
     const jsonData = await api_url.json();
     setCardData(jsonData);
   };
