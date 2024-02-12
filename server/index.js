@@ -4,9 +4,8 @@ const cors = require("cors");
 require('dotenv').config();
 
 app.use(cors({
-    origin: ["localhost:5173", "https://nasa-image.onrender.com/", "https://65c667d8f5c4b823ab7febc8--elegant-gaufre-f57a38.netlify.app/"],
-    // optionsSuccessStatus: 200,
-    default: "https://nasa-image.onrender.com/",
+    origin: "*",
+    optionsSuccessStatus: 200,
 }))
 
 app.all('*', function(req, res, next) {
