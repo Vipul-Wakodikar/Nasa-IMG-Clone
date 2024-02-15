@@ -15,7 +15,7 @@ const SearchedPage = () => {
   const PathRender = () => (
     <>
       <div className={style.pathStyle}>
-        <p style={{ color: "white", fontSize: "22px" }}>
+        <p>
           <a href="/" onClick={() => dispatch(updateSearch(""))}>
             Home
           </a>
@@ -33,8 +33,8 @@ const SearchedPage = () => {
 
     return (
       <>
-        {totalHits && (
-          <p style={{ color: "white", fontSize: "20px" }}>
+        {totalHits > 0 && (
+          <p>
             Displaying page {pageNo} of {Math.ceil(totalHits / 100)}
           </p>
         )}
@@ -67,7 +67,7 @@ const SearchedPage = () => {
     return (
       <>
         <div>
-          <div style={{ marginLeft: "10%" }}>
+          <div className={style.pageAndPathDetails}>
             <PathRender />
             <CurrentPageRender />
           </div>

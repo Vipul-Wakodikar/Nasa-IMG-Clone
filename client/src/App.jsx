@@ -22,14 +22,8 @@ function App() {
             <Route exact path="/" element={<HomePage />} />
           )}
           <Route path="/" exact element={<SearchedPage />} />
-          {/* <Route
-          path="/"
-          exact
-          element={searchValue === "" ? <HomePage /> : <SearchedPage />}
-        /> */}
           <Route path="test" element={<Test />} />
           <Route path="test2" element={<Test2 />} />
-          {/* <Route path="*" element={<NotFound />} /> */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Suspense>

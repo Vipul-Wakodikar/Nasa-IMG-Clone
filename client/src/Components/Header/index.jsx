@@ -99,10 +99,8 @@ const Header = () => {
         <NasaLogo />
       </div>
       <div>
-        <strong>
-          NASA Image and <br />
+          NASA Image and
           Video Library
-        </strong>
       </div>
     </div>
   );
@@ -126,6 +124,7 @@ const Header = () => {
         <div>
           <RenderLogoInfo />
           <div className={style.searchBar}>
+            <div className={style.searchGlow}>
             <input
               type="text"
               id="searchInput"
@@ -152,8 +151,10 @@ const Header = () => {
                 />
               </svg>
             </button>
+
+            </div>
           </div>
-          <div className={style.header}>
+          <div className={style.headerContent}>
             <button
               onClick={() => openCardModal(cardData)}
               className={style.mediaType}

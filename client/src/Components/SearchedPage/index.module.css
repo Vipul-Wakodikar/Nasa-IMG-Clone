@@ -10,8 +10,8 @@
 .pathStyle {
   background-color: rgba(0, 0, 0, 0);
   display: block;
-  font-family: "Sunflower", Helvetica, Arial, sans-serif;
-  font-size: 15.5px;
+  /* font-family: "Sunflower", Helvetica, Arial, sans-serif;
+  font-size: 15.5px; */
   font-weight: 300;
   letter-spacing: 0.2px;
   margin: 0 0 20px;
@@ -24,6 +24,7 @@
   justify-items: center;
   overflow-x: hidden;
 }
+
 .videoContainer {
   display: flex;
   justify-content: center;
@@ -134,6 +135,11 @@
   cursor: pointer;
 }
 
+.pageAndPathDetails {
+  font-size: 18px;
+  margin-left: 5%;
+}
+
 @media only screen and (max-width: 1024px) {
   .hdImgStyle {
     max-width: -webkit-fill-available;
@@ -147,6 +153,9 @@
   }
   .hdImgStyle {
     width: 100%;
+  }
+  .pageAndPathDetails {
+    margin-left: 10%;
   }
 }
 

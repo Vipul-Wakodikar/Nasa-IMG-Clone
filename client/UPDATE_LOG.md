@@ -93,3 +93,13 @@
 2. added style to APOD button 
 
 3. entire page will now be responsive and supported on all the devices
+
+# Version 1.8
+
+1. fixed video overlay style which was adding extra space in the mobile view
+
+2. update the package react-photo-album
+
+3. added font and improved header style
+
+4. add glow in search bar

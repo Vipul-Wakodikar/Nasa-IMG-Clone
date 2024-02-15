@@ -43,7 +43,6 @@ const MasonLayout = ({ url, popular }) => {
       setRecentData(recentJson);
     } catch (error) {
       console.error(error);
-      alert("Oops! Something went wrong. Please try again later.");
     } finally {
       setLoading(false); // Set loading to false when data fetching is complete
     }

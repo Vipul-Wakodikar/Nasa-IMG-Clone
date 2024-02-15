@@ -10,7 +10,8 @@
 .vidOverlay {
   background-image: url(https://images.nasa.gov/images/badge_video-sm..png);
   position: absolute;
-  width: 209px !important;
+  width: 50px !important;
+  height: 49px;
   background-repeat: no-repeat;
   margin: 0 !important;
   padding: 0 !important;
