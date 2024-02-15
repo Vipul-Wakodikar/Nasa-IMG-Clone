@@ -10,7 +10,6 @@ const HomePage = () => {
       <button
         onClick={() => setIsPopular(false)}
         className={!isPopular ? style.activeButton : ""}
-        autoFocus
       >
         Newest Uploads
       </button>
