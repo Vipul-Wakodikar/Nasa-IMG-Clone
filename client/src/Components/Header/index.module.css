@@ -21,9 +21,16 @@
   border-bottom: 2px solid black;
 }
 
-.closeButton {
+.closeButtonPosition {
   display: flex;
   justify-content: end;
+}
+
+.closeButton {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 18px;
 }
 
 .searchBar {

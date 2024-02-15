@@ -14,8 +14,8 @@ const HeaderModal = ({ isOpen, data, onClose, appElement }) => {
   if (!isOpen) return null;
   return (
     <ReactModal isOpen={isOpen} appElement={appElement} style={customStyles}>
-      <div className={style.closeButton}>
-        <button onClick={onClose}>X</button>
+      <div className={style.closeButtonPosition}>
+        <button onClick={onClose} className={style.closeButton}>X</button>
       </div>
       <div className={style.modalContent}>
         {data && (

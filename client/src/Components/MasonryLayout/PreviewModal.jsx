@@ -110,8 +110,8 @@ const PreviewModal = ({ isOpen, data, onClose, appElement, key }) => {
       key={key}
       style={customStyles}
     >
-      <div className={style.closeButton}>
-        <button onClick={onClose}>X</button>
+      <div className={style.closeButtonPosition}>
+        <button onClick={onClose} className={style.closeButton}>X</button>
       </div>
       <RenderVideoData />
       <RenderImageData />
