@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import AudioRender from "./AudioRender";
 import notFound from "../../assets/Image404NotFound.jpg";
 import { updateTotalHits } from "../../features/data/dataSlice";
+import Loadinger from "../../assets/Loading.webp";
 
 const MasonLayout = ({ url, popular }) => {
   const [recentData, setRecentData] = useState([]);
@@ -14,7 +15,6 @@ const MasonLayout = ({ url, popular }) => {
   const [openModal, setOpenModal] = useState(false);
   const [modalData, setModalData] = useState(null);
   const [noResults, setNoResults] = useState(false);
-  const [loading, setLoading] = useState(true);
 
   const mediaType = useSelector((state) => state.mediaType.value);
   const searchValue = useSelector((state) => state.data.value);
@@ -34,7 +34,6 @@ const MasonLayout = ({ url, popular }) => {
 
   const fetchData = async () => {
     try {
-      setLoading(true); // Set loading to true while fetching data
       const recent = await fetch(url);
       if (!recent.ok) {
         throw new Error(`Failed to fetch data. Status: ${recent.status}`);
@@ -43,8 +42,6 @@ const MasonLayout = ({ url, popular }) => {
       setRecentData(recentJson);
     } catch (error) {
       console.error(error);
-    } finally {
-      setLoading(false); // Set loading to false when data fetching is complete
     }
   };
 
@@ -87,12 +84,11 @@ const MasonLayout = ({ url, popular }) => {
   const filterHideSrc = displayData.filter((display) => display.src !== "hide");
 
   const RenderPhotoAlbum = () => {
-
     const AdjustColums = () => {
-      if (window.innerWidth > 992) return 4
-      else if (window.innerWidth < 992 && window.innerWidth > 479) return 3
-      else return 2
-    }
+      if (window.innerWidth > 992) return 4;
+      else if (window.innerWidth < 992 && window.innerWidth > 479) return 3;
+      else return 2;
+    };
 
     return (
       <>
@@ -129,7 +125,10 @@ const MasonLayout = ({ url, popular }) => {
                       <img
                         src={photo.src}
                         alt={photo.data[0].title || "Error"}
-                        style={{ ...wrapperStyle, marginBottom: "12px !important" }}
+                        style={{
+                          ...wrapperStyle,
+                          marginBottom: "12px !important",
+                        }}
                         loading="lazy"
                       />
                     )}
@@ -140,7 +139,10 @@ const MasonLayout = ({ url, popular }) => {
                       mediaType.includes("audio")) && (
                       <AudioRender
                         photo={photo}
-                        wrapperStyle={{ ...wrapperStyle, marginBottom: "12px !important" }}
+                        wrapperStyle={{
+                          ...wrapperStyle,
+                          marginBottom: "12px !important",
+                        }}
                         keyId={photo.data[0].nasa_id}
                       />
                     )}
@@ -164,8 +166,12 @@ const MasonLayout = ({ url, popular }) => {
 
   return (
     <>
-      {loading && popular ? (
-        <h1 className={style.noResults}>Loading...</h1>
+      {filterHideSrc.length === 0 && !noResults ? (
+        <>
+          <div className={style.loadingGif}>
+            <img src={Loadinger} alt="Loading..." width={100} height={100} />
+          </div>
+        </>
       ) : noResults ? (
         <h1 className={style.noResults}>
           Based on your selections, no results were found.

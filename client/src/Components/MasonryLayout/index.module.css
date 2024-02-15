@@ -58,6 +58,12 @@
   font-size: 1.5em;
 } */
 
+.loadingGif {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .audioWidth {
   width: -webkit-fill-available;
 }

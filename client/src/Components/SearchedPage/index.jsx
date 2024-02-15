@@ -42,6 +42,8 @@ const SearchedPage = () => {
     );
   };
 
+  useEffect(() => {setPageNo(1)}, [searchValue])
+
   const RenderAside = () => {
     return (
       <>

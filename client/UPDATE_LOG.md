@@ -103,3 +103,7 @@
 3. added font and improved header style
 
 4. add glow in search bar
+
+5. Added loading screen and gif
+
+6. added acessibility in input search

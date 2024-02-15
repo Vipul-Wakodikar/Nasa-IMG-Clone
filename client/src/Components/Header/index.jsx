@@ -132,6 +132,7 @@ const Header = () => {
               defaultValue={searchValue}
               placeholder="Search..."
               className={style.searchInput}
+              onKeyDown={(e) => {if (e.key === "Enter") dispatch(updateSearch(searchData))}}
             />
             <button
               onClick={() => dispatch(updateSearch(searchData))}

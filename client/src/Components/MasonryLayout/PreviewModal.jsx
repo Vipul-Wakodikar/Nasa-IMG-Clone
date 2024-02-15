@@ -28,7 +28,7 @@ const PreviewModal = ({ isOpen, data, onClose, appElement, key }) => {
   if (!isOpen) return null;
 
   const convertUrlsToLinks = (description) => {
-    const urlRegex = /(https:\/\/photojournal\.[^\s]+)/g || /(http:\/\/photojournal\.[^\s]+)/g;
+    const urlRegex = /(https?:\/\/photojournal\.[^\s]+)/g;
     return description.replace(urlRegex, (url) => {
       return `<a href="${url}" target="_blank"  rel="noopener noreferrer">${url}</a>`;
     });
@@ -37,7 +37,7 @@ const PreviewModal = ({ isOpen, data, onClose, appElement, key }) => {
   const DisplayData = () => (
     <>
       <div key={data.data[0].nasa_id}>
-        <h3>{data.data[0].title}</h3>
+        <h3 style={{marginTop: "0"}}>{data.data[0].title}</h3>
         <p>Date Created: {data.data[0].date_created || "Not Found"}</p>
         <p>Nasa Id: {data.data[0].nasa_id || "Not Found"}</p>
         {data.data[0].keywords && <p>Keyword:</p>}
