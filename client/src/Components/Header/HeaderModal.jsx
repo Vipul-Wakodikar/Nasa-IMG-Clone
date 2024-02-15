@@ -2,6 +2,7 @@ import React from "react";
 import style from "./index.module.css";
 import ReactModal from "react-modal";
 import notFound from "../../assets/Image404NotFound.jpg";
+import Spinner from "../../Containers/Spinner";
 
 const customStyles = {
   content: {
@@ -18,7 +19,7 @@ const HeaderModal = ({ isOpen, data, onClose, appElement }) => {
         <button onClick={onClose} className={style.closeButton}>X</button>
       </div>
       <div className={style.modalContent}>
-        {data && (
+        {data ? (
           <>
             <div>
               <img src={data.hdurl || notFound} alt={data.title} className={style.hdImgStyle} loading="lazy" />
@@ -30,7 +31,7 @@ const HeaderModal = ({ isOpen, data, onClose, appElement }) => {
               <p>Copy right: {data.copyright || "Not Available"}</p>
             </div>
           </>
-        )}
+        ) : (<Spinner />)}
       </div>
     </ReactModal>
   );

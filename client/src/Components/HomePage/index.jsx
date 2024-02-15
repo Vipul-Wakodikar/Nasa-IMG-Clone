@@ -33,8 +33,8 @@ const HomePage = () => {
           <MasonLayout url="https://images-assets.nasa.gov/recent.json" popular = {isPopular}/>
         </>
       )} */}
-      <MasonLayout url="https://images-assets.nasa.gov/popular.json" popular = {!isPopular} />
-      <MasonLayout url="https://images-assets.nasa.gov/recent.json" popular = {isPopular} />
+      <MasonLayout url={import.meta.env.VITE_APOD_POPULAR} popular = {!isPopular} />
+      <MasonLayout url={import.meta.env.VITE_APOD_RECENT} popular = {isPopular} />
     </>
   );
 };

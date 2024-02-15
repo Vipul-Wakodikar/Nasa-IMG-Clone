@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import AudioRender from "./AudioRender";
 import notFound from "../../assets/Image404NotFound.jpg";
 import { updateTotalHits } from "../../features/data/dataSlice";
-import Loadinger from "../../assets/Loading.webp";
+import Spinner from "../../Containers/Spinner";
 
 const MasonLayout = ({ url, popular }) => {
   const [recentData, setRecentData] = useState([]);
@@ -15,7 +15,7 @@ const MasonLayout = ({ url, popular }) => {
   const [openModal, setOpenModal] = useState(false);
   const [modalData, setModalData] = useState(null);
   const [noResults, setNoResults] = useState(false);
-
+  const [errors, setError] = useState();
   const mediaType = useSelector((state) => state.mediaType.value);
   const searchValue = useSelector((state) => state.data.value);
   const dispatch = useDispatch();
@@ -36,12 +36,14 @@ const MasonLayout = ({ url, popular }) => {
     try {
       const recent = await fetch(url);
       if (!recent.ok) {
+        setError(`Failed to fetch data. Status: ${recent.status}`);
         throw new Error(`Failed to fetch data. Status: ${recent.status}`);
       }
       const recentJson = await recent.json();
       setRecentData(recentJson);
     } catch (error) {
       console.error(error);
+      setError(error);
     }
   };
 
@@ -84,6 +86,7 @@ const MasonLayout = ({ url, popular }) => {
   const filterHideSrc = displayData.filter((display) => display.src !== "hide");
 
   const RenderPhotoAlbum = () => {
+    
     const AdjustColums = () => {
       if (window.innerWidth > 992) return 4;
       else if (window.innerWidth < 992 && window.innerWidth > 479) return 3;
@@ -92,73 +95,81 @@ const MasonLayout = ({ url, popular }) => {
 
     return (
       <>
-        <PhotoAlbum
-          layout="masonry"
-          photos={filterHideSrc}
-          columns={AdjustColums}
-          renderPhoto={({ photo, wrapperStyle, renderDefaultPhoto }) => {
-            return (
-              <>
-                {photo.data[0].media_type !== "audio" ? (
-                  <button
-                    className={`${style.cardButtonStyle} ${
-                      photo.src === "hide" && style.hideButton
-                    }`}
-                    onClick={() => {
-                      if (JSON.stringify(modalData) !== JSON.stringify(photo)) {
-                        openCardModal(photo || null);
-                      }
-                    }}
-                    style={popular ? { display: "none" } : wrapperStyle}
-                  >
-                    {/* {renderDefaultPhoto({ wrapped: true })} */}
-                    {photo.data[0].media_type.includes("video") && (
-                      <div
-                        className={
-                          photo.data[0].media_type.includes("video") &&
-                          style.vidOverlay
-                        }
-                        style={wrapperStyle}
-                      />
-                    )}
-                    {photo.src && (
-                      <img
-                        src={photo.src}
-                        alt={photo.data[0].title || "Error"}
-                        style={{
-                          ...wrapperStyle,
-                          marginBottom: "12px !important",
-                        }}
-                        loading="lazy"
-                      />
-                    )}
-                  </button>
-                ) : (
+        {errors ? (
+          <>{errors}</>
+        ) : (
+          <>
+            <PhotoAlbum
+              layout="masonry"
+              photos={filterHideSrc}
+              columns={AdjustColums}
+              renderPhoto={({ photo, wrapperStyle, renderDefaultPhoto }) => {
+                return (
                   <>
-                    {((searchValue === "" && mediaType === "image") ||
-                      mediaType.includes("audio")) && (
-                      <AudioRender
-                        photo={photo}
-                        wrapperStyle={{
-                          ...wrapperStyle,
-                          marginBottom: "12px !important",
+                    {photo.data[0].media_type !== "audio" ? (
+                      <button
+                        className={`${style.cardButtonStyle} ${
+                          photo.src === "hide" && style.hideButton
+                        }`}
+                        onClick={() => {
+                          if (
+                            JSON.stringify(modalData) !== JSON.stringify(photo)
+                          ) {
+                            openCardModal(photo || null);
+                          }
                         }}
-                        keyId={photo.data[0].nasa_id}
-                      />
+                        style={popular ? { display: "none" } : wrapperStyle}
+                      >
+                        {/* {renderDefaultPhoto({ wrapped: true })} */}
+                        {photo.data[0].media_type.includes("video") && (
+                          <div
+                            className={
+                              photo.data[0].media_type.includes("video") &&
+                              style.vidOverlay
+                            }
+                            style={wrapperStyle}
+                          />
+                        )}
+                        {photo.src && (
+                          <img
+                            src={photo.src}
+                            alt={photo.data[0].title || "Error"}
+                            style={{
+                              ...wrapperStyle,
+                              marginBottom: "12px !important",
+                            }}
+                            loading="lazy"
+                          />
+                        )}
+                      </button>
+                    ) : (
+                      <>
+                        {((searchValue === "" && mediaType === "image") ||
+                          mediaType.includes("audio")) && (
+                          <AudioRender
+                            photo={photo}
+                            wrapperStyle={{
+                              ...wrapperStyle,
+                              marginBottom: "12px !important",
+                            }}
+                            keyId={photo.data[0].nasa_id}
+                          />
+                        )}
+                      </>
                     )}
                   </>
-                )}
-              </>
-            );
-          }}
-        />
-        {openModal && modalData && (
-          <Modal
-            isOpen={openModal}
-            data={modalData}
-            onClose={handleCloseModal}
-            appElement={document.getElementById("root")}
-          />
+                );
+              }}
+            />
+            {openModal && modalData && (
+              <Modal
+                isOpen={openModal}
+                data={modalData}
+                onClose={handleCloseModal}
+                appElement={document.getElementById("root")}
+              />
+            )}
+          </>
         )}
       </>
     );
@@ -168,9 +179,7 @@ const MasonLayout = ({ url, popular }) => {
     <>
       {filterHideSrc.length === 0 && !noResults ? (
         <>
-          <div className={style.loadingGif}>
-            <img src={Loadinger} alt="Loading..." width={100} height={100} />
-          </div>
+          <Spinner />
         </>
       ) : noResults ? (
         <h1 className={style.noResults}>

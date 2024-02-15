@@ -66,6 +66,17 @@ const SearchedPage = () => {
   };
 
   const RenderMasonLayout = () => {
+
+    function getSearchApiUrl(pageNo, mediaType, searchValue) {
+      const baseUrl = import.meta.env.VITE_SEARCHED_DATA;
+      return baseUrl
+        .replace(':pageNo', pageNo)
+        .replace(':mediaType', mediaType)
+        .replace(':searchValue', searchValue);
+    }
+
+    console.log('first', import.meta.env.VITE_SEARCHED_DATA, getSearchApiUrl(pageNo, mediaType, searchValue))
+
     return (
       <>
         <div>
@@ -74,7 +85,8 @@ const SearchedPage = () => {
             <CurrentPageRender />
           </div>
           <MasonLayout
-            url={`https://images-api.nasa.gov/search?q=${searchValue}&page=${pageNo}&media_type=${mediaType}`}
+            // url={`https://images-api.nasa.gov/search?q=${searchValue}&page=${pageNo}&media_type=${mediaType}`}
+            url={getSearchApiUrl(pageNo, mediaType, searchValue)}
           />
         </div>
       </>
