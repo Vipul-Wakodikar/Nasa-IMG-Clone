@@ -7,7 +7,7 @@ const Card = ({ data, onClick }) => {
   const searchValue = useSelector((state) => state.data.value);
 
   const [audioData, setAudioData] = useState();
-  // console.log('dats', data)
+  
   useEffect(() => {
     const fetchData = async () => {
       const AudioData = await fetch(data.href);

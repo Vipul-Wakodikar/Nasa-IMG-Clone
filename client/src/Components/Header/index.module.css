@@ -66,6 +66,18 @@
   border: none;
 }
 
+.backToHome {
+  background-color: #15418c;
+  color: white;
+  border: none;
+  font-size: 18px;
+  font-weight: 300;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px
+}
+
 .searchInput {
   background-color: #4c4d53;
   color: white;
