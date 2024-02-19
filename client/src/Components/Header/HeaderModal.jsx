@@ -35,14 +35,29 @@ const HeaderModal = ({ isOpen, data, onClose, appElement }) => {
             ) : (
               <>
                 <div>
-                  <i>Astronomical picture of the day</i>
-                  <img
-                    src={data.hdurl || notFound}
-                    alt={data.title}
-                    className={style.hdImgStyle}
-                    loading="lazy"
-                  />
-                  <a href={data.hdurl} download>View full image</a>
+                  {data.hdurl ? (
+                    <>
+                      <i>Astronomical picture of the day</i>
+                      <img
+                        src={data.hdurl || notFound}
+                        alt={data.title}
+                        className={style.hdImgStyle}
+                        loading="lazy"
+                      />
+                      <a href={data.hdurl} download>
+                        View full image
+                      </a>
+                    </>
+                  ) : (
+                    <>
+                      <iframe
+                        src={data.url}
+                        frameborder="0"
+                        width="100%"
+                        height="100%"
+                      />
+                    </>
+                  )}
                 </div>
                 <div>
                   <h3>{data.title}</h3>
