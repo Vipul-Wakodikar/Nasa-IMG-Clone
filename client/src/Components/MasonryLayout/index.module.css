@@ -1,7 +1,8 @@
 .cardButtonStyle {
   border: none;
   background-color: transparent;
-  width: -webkit-fill-available;
+  /* max-width: -webkit-fill-available; */
+  max-width: 100%;
   color: white;
   cursor: pointer;
   padding: 0px;
@@ -109,14 +110,15 @@
 
 @media only screen and (max-width: 1024px) {
   .hdImgStyle {
-    max-width: -webkit-fill-available;
+    /* max-width: -webkit-fill-available; */
+    max-width: 100%;
   }
 }
 
 @media only screen and (max-width: 479px) {
   .masonMargin {
-    margin-left: 5%;
-    margin-right: 5%;
+    margin-left: 2%;
+    margin-right: 2%;
   }
 }
 

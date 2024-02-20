@@ -8,6 +8,7 @@ const customStyles = {
   content: {
     backgroundColor: "#26282f",
     color: "white",
+    padding: "10px",
   },
 };
 
