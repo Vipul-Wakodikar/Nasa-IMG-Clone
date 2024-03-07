@@ -1,14 +1,12 @@
 .imagePosition {
     display: flex;
     justify-content: center;
-    align-items: center; /* Center vertically as well */
-    /* background-image: url('../../assets/NotFound.png'); */
+    align-items: center;
     background-image: url('https://www.nasa.gov/wp-content/themes/nasa/assets/images/404-bg.jpg');
-    background-size: contain; /* Fit image within container */
-    background-position: center; /* Center image within container */
-    background-color: #000; /* Fallback color if image fails to load */
+    background-size: contain;
+    background-position: center;
+    background-color: #000;
     background-repeat: no-repeat;
-    /* background: linear-gradient(65.99deg,#000 0,transparent 99.04%); */
 }
 
 .notFoundText {
@@ -22,7 +20,6 @@
     color: #fff;
     fill: #fff;
     font-family: "dm-mono";
-    /* position: absolute; */
 }
   
 .mediaBackground {

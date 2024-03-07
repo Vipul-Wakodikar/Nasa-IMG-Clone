@@ -32,7 +32,6 @@ const AudioRender = ({ photo, wrapperStyle, keyId }) => {
         Your browser does not support the audio element.
       </audio>
       <h3 className={style.titleStyle}>{photo.data[0].title}</h3>
-      {/* <p>{photo.data[0].date_created}</p> */}
     </div>)}
     </>
   );

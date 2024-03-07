@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import MasonLayout from "../MasonryLayout";
+import React, { Suspense, useState } from "react";
+const MasonLayout = React.lazy(() => import("../MasonryLayout"));
 import style from "./index.module.css";
+import Spinner from "../../Containers/Spinner";
 
 const HomePage = () => {
   const [isPopular, setIsPopular] = useState(false);
@@ -25,15 +26,16 @@ const HomePage = () => {
   return (
     <>
       <TrendingButtons />
-      {/* {isPopular ? (
-        <MasonLayout url="https://images-assets.nasa.gov/popular.json" popular = {!isPopular}/>
-      ) : (
-        <>
-          <MasonLayout url="https://images-assets.nasa.gov/recent.json" popular = {isPopular}/>
-        </>
-      )} */}
-      <MasonLayout url={import.meta.env.VITE_APOD_POPULAR} popular = {!isPopular} />
-      <MasonLayout url={import.meta.env.VITE_APOD_RECENT} popular = {isPopular} />
+      <Suspense fallback={<Spinner />}>
+        <MasonLayout
+          url={import.meta.env.VITE_APOD_POPULAR}
+          popular={!isPopular}
+        />
+        <MasonLayout
+          url={import.meta.env.VITE_APOD_RECENT}
+          popular={isPopular}
+        />
+      </Suspense>
     </>
   );
 };

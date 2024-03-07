@@ -3,10 +3,9 @@ const app = express();
 const cors = require("cors");
 require("dotenv").config();
 
-// app.use(cors({
-//     origin: "*",
-//     optionsSuccessStatus: 200,
-// }))
+const compression = require('compression');
+
+app.use(compression());
 
 app.use((req, res, next) => {
   res.setHeader(
@@ -25,7 +24,7 @@ app.get("/", (req, res) => {
 app.get("/apod", (req, res) => {
   const origin = req.get("Origin");
   if (origin !== process.env.ORIGIN_URL) {
-    res.status(403).send("Forbidden Access");
+    res.status(403).json({error: "Forbidden Access"});
     return;
   } else {
     fetch(`https://api.nasa.gov/planetary/apod?api_key=${process.env.API_KEY}`)
@@ -37,7 +36,7 @@ app.get("/apod", (req, res) => {
 app.get("/recent", (req, res) => {
   const origin = req.get("Origin");
   if (origin !== process.env.ORIGIN_URL) {
-    res.status(403).send("Forbidden Access");
+    res.status(403).json({error: "Forbidden Access"});
     return;
   } else {
     fetch("https://images-assets.nasa.gov/recent.json")
@@ -49,7 +48,7 @@ app.get("/recent", (req, res) => {
 app.get("/popular", (req, res) => {
   const origin = req.get("Origin");
   if (origin !== process.env.ORIGIN_URL) {
-    res.status(403).send("Forbidden Access");
+    res.status(403).json({error: "Forbidden Access"});
     return;
   } else {
     fetch("https://images-assets.nasa.gov/popular.json")
@@ -62,7 +61,7 @@ app.get("/search", (req, res) => {
   const origin = req.get("Origin");
   const { q, page, media_type } = req.query;
   if (origin !== process.env.ORIGIN_URL) {
-    res.status(403).send("Forbidden Access");
+    res.status(403).json({error: "Forbidden Access"});
     return;
   } else {
     fetch(`https://images-api.nasa.gov/search?q=${q}&page=${page}&media_type=${media_type}`)

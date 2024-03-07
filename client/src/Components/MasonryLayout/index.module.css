@@ -1,7 +1,6 @@
 .cardButtonStyle {
   border: none;
   background-color: transparent;
-  /* max-width: -webkit-fill-available; */
   max-width: 100%;
   color: white;
   cursor: pointer;
@@ -55,10 +54,6 @@
   font-size: 18px;
 }
 
-/* .closeButton button {
-  font-size: 1.5em;
-} */
-
 .loadingGif {
   display: flex;
   justify-content: center;
@@ -90,17 +85,14 @@
 
 .unList {
   list-style: none;
-  /* max-width: 300px; */
   white-space: nowrap;
   display: flex;
   flex-wrap: wrap;
 }
 
 .keyWordList {
-  /* background-color: #000; */
   display: inline-block; 
   margin-right: 10px;
-  /* white-space: nowrap; */
 }
 
 .masonMargin {
@@ -110,7 +102,6 @@
 
 @media only screen and (max-width: 1024px) {
   .hdImgStyle {
-    /* max-width: -webkit-fill-available; */
     max-width: 100%;
   }
 }

@@ -55,7 +55,6 @@
   
   @media only screen and (max-width: 1024px) {
     .hdImgStyle {
-      /* max-width: -webkit-fill-available; */
     max-width: 100%;
     }
     .buttonContainer button {

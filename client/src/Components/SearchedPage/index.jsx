@@ -85,7 +85,6 @@ const SearchedPage = () => {
             <CurrentPageRender />
           </div>
           <MasonLayout
-            // url={`https://images-api.nasa.gov/search?q=${searchValue}&page=${pageNo}&media_type=${mediaType}`}
             url={getSearchApiUrl(pageNo, mediaType, searchValue)}
           />
         </div>

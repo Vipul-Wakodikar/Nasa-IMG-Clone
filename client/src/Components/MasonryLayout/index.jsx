@@ -16,6 +16,7 @@ const MasonLayout = ({ url, popular }) => {
   const [modalData, setModalData] = useState(null);
   const [noResults, setNoResults] = useState(false);
   const [errors, setError] = useState();
+  
   const mediaType = useSelector((state) => state.mediaType.value);
   const searchValue = useSelector((state) => state.data.value);
   const dispatch = useDispatch();
@@ -36,13 +37,13 @@ const MasonLayout = ({ url, popular }) => {
     try {
       const recent = await fetch(url);
       if (!recent.ok) {
+        console.log("FAILED BADLY")
         setError(`Failed to fetch data. Status: ${recent.status}`);
         throw new Error(`Failed to fetch data. Status: ${recent.status}`);
       }
       const recentJson = await recent.json();
       setRecentData(recentJson);
     } catch (error) {
-      console.error(error);
       setError(error);
     }
   };

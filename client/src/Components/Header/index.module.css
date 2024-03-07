@@ -12,7 +12,6 @@
   align-items: center;
   width: 100%;
   margin: 10px 0px;
-  /* background-color: #15418c; */
 }
 
 .headerBackground {
@@ -113,7 +112,6 @@ input[type='text'] {
 
 @media only screen and (max-width: 1024px) {
   .hdImgStyle {
-    /* max-width: -webkit-fill-available; */
     max-width: 100%;
   }
 }
