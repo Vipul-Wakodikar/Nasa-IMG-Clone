@@ -8,8 +8,9 @@ import AudioRender from "./AudioRender";
 import notFound from "../../assets/Image404NotFound.jpg";
 import { updateTotalHits } from "../../features/data/dataSlice";
 import Spinner from "../../Containers/Spinner";
+import LoadingMason from "../../Containers/LoadingCSS";
 
-const MasonLayout = ({ url, popular }) => {
+const MasonLayout = ({ url, popular, hideLoader }) => {
   const [recentData, setRecentData] = useState([]);
   const [displayData, setDisplayData] = useState([]);
   const [openModal, setOpenModal] = useState(false);
@@ -178,9 +179,10 @@ const MasonLayout = ({ url, popular }) => {
 
   return (
     <>
-      {filterHideSrc.length === 0 && !noResults ? (
+      {filterHideSrc.length === 0 && !noResults && !hideLoader ? (
         <>
-          <Spinner />
+          {/* <Spinner /> */}
+          <LoadingMason />
         </>
       ) : noResults ? (
         <h1 className={style.noResults}>

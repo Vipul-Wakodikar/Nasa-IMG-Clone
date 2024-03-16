@@ -2,6 +2,7 @@ import React, { Suspense, useState } from "react";
 const MasonLayout = React.lazy(() => import("../MasonryLayout"));
 import style from "./index.module.css";
 import Spinner from "../../Containers/Spinner";
+import LoadingMason from "../../Containers/LoadingCSS";
 
 const HomePage = () => {
   const [isPopular, setIsPopular] = useState(false);
@@ -26,10 +27,11 @@ const HomePage = () => {
   return (
     <>
       <TrendingButtons />
-      <Suspense fallback={<Spinner />}>
+      <Suspense fallback={<LoadingMason />}>
         <MasonLayout
           url={import.meta.env.VITE_APOD_POPULAR}
           popular={!isPopular}
+          hideLoader={true}
         />
         <MasonLayout
           url={import.meta.env.VITE_APOD_RECENT}
