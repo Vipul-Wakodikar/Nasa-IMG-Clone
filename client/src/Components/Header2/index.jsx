@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { updateSearch } from "../../features/data/dataSlice";
 import { setMediaType } from "../../features/data/mediaTypeSlice";
 import NasaLogo from "../../Containers/Logo";
+import Spinner from "../../Containers/Spinner";
 
 const Header2 = () => {
   const [cardData, setCardData] = useState([]);
@@ -153,7 +154,9 @@ const Header2 = () => {
               className={style.mediaType}
               disabled={cardData && cardData.length === 0}
             >
-              Picture of the day
+              {
+                cardData && cardData.length === 0 ? ("Loading ...") : ("Picture of the day")
+              }
             </button>
             <CheckboxMediaButtons />
           </div>
