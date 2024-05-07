@@ -107,3 +107,7 @@
 5. Added loading screen and gif
 
 6. added acessibility in input search
+
+# Version 1.9
+
+1. Made piture of the day button disabled if there are no data to display

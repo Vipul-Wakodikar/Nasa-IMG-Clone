@@ -59,6 +59,12 @@
     font-size: 18px;
     font-family: "Titillium Web",Helvetica,Arial,sans-serif
   }
+
+  .mediaType[disabled] {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
   
   .searchButton {
     background-color: #15418c;

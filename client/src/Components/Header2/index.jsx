@@ -7,7 +7,7 @@ import { setMediaType } from "../../features/data/mediaTypeSlice";
 import NasaLogo from "../../Containers/Logo";
 
 const Header2 = () => {
-  const [cardData, setCardData] = useState();
+  const [cardData, setCardData] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [modalData, setModalData] = useState(null); // Store data for modal
   const [searchData, setSearchData] = useState("random");
@@ -151,6 +151,7 @@ const Header2 = () => {
             <button
               onClick={() => openCardModal(cardData)}
               className={style.mediaType}
+              disabled={cardData && cardData.length === 0}
             >
               Picture of the day
             </button>
