@@ -39,6 +39,7 @@ const PreviewModal = ({ isOpen, data, onClose, appElement, key }) => {
     <>
       <div key={data.data[0].nasa_id}>
         <h3 style={{marginTop: "0"}}>{data.data[0].title}</h3>
+        <ShareButton url={`${import.meta.env.VITE_APOD_APP_BASE_URL}/details/${data.data[0].nasa_id}`} title={data.data[0].title} />
         <p>Date Created: {data.data[0].date_created || "Not Found"}</p>
         <p>Nasa Id: {data.data[0].nasa_id || "Not Found"}</p>
         {data.data[0].keywords && <p>Keyword:</p>}
@@ -97,7 +98,7 @@ const PreviewModal = ({ isOpen, data, onClose, appElement, key }) => {
               alt={data.data[0].title}
               className={style.hdImgStyle}
             />
-            <ShareButton url={`${import.meta.env.VITE_APOD_APP_BASE_URL}/details/${data.data[0].nasa_id}`} title={data.data[0].title} />
+            {/* <ShareButton url={`${import.meta.env.VITE_APOD_APP_BASE_URL}/details/${data.data[0].nasa_id}`} title={data.data[0].title} /> */}
             <DisplayData />
           </div>
         </>

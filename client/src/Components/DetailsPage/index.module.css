@@ -124,9 +124,16 @@
   }
 }
 
+.modalContent {
+  padding: 16px;
+}
+
 .previewModalStyle .modalContent {
   background-color: #26282f;
   color: white;
+  
+  padding-right: 16px;
+  padding-left: 16px;
 }
 
 @media only screen and (min-width: 796px) {

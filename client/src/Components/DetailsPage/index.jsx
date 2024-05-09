@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import style from "./index.module.css";
+import LoadingMason from "../../Containers/LoadingCSS";
 
 const DetailsPage = () => {
   const [displayData, setDisplayData] = useState([]);
@@ -171,6 +172,7 @@ const DetailsPage = () => {
         <div>Asset not found</div>
       ) : (
         <>
+        {displayData && displayData.length === 0 && <LoadingMason />}
           <RenderData
             renderedData={displayData && displayData["AVAIL:MediaType"]}
           />
