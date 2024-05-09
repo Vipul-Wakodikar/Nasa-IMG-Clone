@@ -70,6 +70,20 @@ app.get("/search", (req, res) => {
   }
 });
 
+app.get("/details/:nasa_id", (req, res) => {
+  const origin = req.get("Origin");
+  // const { nasa_id } = req.query;
+  const nasa_id = req.params.nasa_id;
+  if (origin !== process.env.ORIGIN_URL) {
+    res.status(403).json({error: "Forbidden Access"});
+    return;
+  } else {
+    fetch(`https://images-api.nasa.gov/metadata/${nasa_id}`)
+      .then((resObj) => resObj.json())
+      .then((data) => res.json(data));
+  }
+});
+
 app.get("/api/:id", (req, res) => {
   const id = req.params.id;
   res.json({ a: "asdasd", b: "asdasd", c: id || "nf" });

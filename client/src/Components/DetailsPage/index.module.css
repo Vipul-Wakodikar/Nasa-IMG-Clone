@@ -1,0 +1,146 @@
+.cardButtonStyle {
+  border: none;
+  background-color: transparent;
+  max-width: 100%;
+  color: white;
+  cursor: pointer;
+  padding: 0px;
+}
+
+.vidOverlay {
+  background-image: url(https://images.nasa.gov/images/badge_video-sm..png);
+  position: absolute;
+  width: 50px !important;
+  height: 49px;
+  background-repeat: no-repeat;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.rootCardContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  flex-direction: column;
+  width: 100%;
+}
+.cardContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center; /* Center individual cards within each column */
+  overflow-x: hidden;
+}
+.videoContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.outerBorder {
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 5px;
+  width: 252px;
+}
+
+.closeButtonPosition {
+  display: flex;
+  justify-content: end;
+}
+
+.closeButton {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 18px;
+}
+
+.loadingGif {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.audioWidth {
+  width: -webkit-fill-available;
+}
+
+.titleStyle {
+  color: white;
+}
+
+.audioImageStyle {
+  display: grid;
+  justify-content: center;
+}
+
+.hideButton {
+  display: none !important;
+}
+
+.noResults {
+  color: white;
+  display: grid;
+  justify-content: center;
+}
+
+.unList {
+  list-style: none;
+  white-space: nowrap;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.keyWordList {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.masonMargin {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+@media only screen and (max-width: 1024px) {
+  .hdImgStyle {
+    max-width: 100%;
+  }
+}
+
+@media only screen and (max-width: 479px) {
+  .masonMargin {
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .modalContent {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+  }
+  .hdImgStyle {
+    width: 100%;
+  }
+}
+
+.previewModalStyle .modalContent {
+  background-color: #26282f;
+  color: white;
+}
+
+@media only screen and (min-width: 796px) {
+  .cardContainer {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media only screen and (max-width: 796px) and (min-width: 500px) {
+  .cardContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media only screen and (max-width: 500px) {
+  .cardContainer {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

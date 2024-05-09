@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import style from "./index.module.css";
 import ReactModal from "react-modal";
+import ShareButton from "../../Containers/ShareButton";
 
 const customStyles = {
   content: {
@@ -96,6 +97,7 @@ const PreviewModal = ({ isOpen, data, onClose, appElement, key }) => {
               alt={data.data[0].title}
               className={style.hdImgStyle}
             />
+            <ShareButton url={`${import.meta.env.VITE_APOD_APP_BASE_URL}/details/${data.data[0].nasa_id}`} title={data.data[0].title} />
             <DisplayData />
           </div>
         </>

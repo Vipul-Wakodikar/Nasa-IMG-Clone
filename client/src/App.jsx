@@ -4,6 +4,7 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import NotFound from "./Components/NotFound";
 import Header from "./Components/Header2";
 import Footer from "./Components/Footer";
+import DetailsPage from "./Components/DetailsPage";
 
 // Lazy-loaded components
 const HomePage = lazy(() => import("./Components/HomePage"));
@@ -22,6 +23,7 @@ function App() {
             <Route exact path="/" element={<HomePage />} />
           )}
           <Route path="/" exact element={<SearchedPage />} />
+          <Route path="/details/:id" element={<DetailsPage />} />
           <Route path="test" element={<Test />} />
           <Route path="test2" element={<Test2 />} />
           <Route path="*" element={<Navigate to="/" />} />
