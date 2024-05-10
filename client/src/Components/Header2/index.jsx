@@ -6,6 +6,7 @@ import { updateSearch } from "../../features/data/dataSlice";
 import { setMediaType } from "../../features/data/mediaTypeSlice";
 import NasaLogo from "../../Containers/Logo";
 import Spinner from "../../Containers/Spinner";
+import {useNavigate} from 'react-router-dom'
 
 const Header2 = () => {
   const [cardData, setCardData] = useState([]);
@@ -16,6 +17,8 @@ const Header2 = () => {
   const dispatch = useDispatch();
   const searchValue = useSelector((state) => state.data.value);
   const mediaTypes = useSelector((state) => state.mediaType.value);
+  const navigate = useNavigate()
+
   const fetchData = async () => {
     try {
       const api_url = await fetch(import.meta.env.VITE_APOD_API);
@@ -129,7 +132,7 @@ const Header2 = () => {
                 }}
               />
               <button
-                onClick={() => dispatch(updateSearch(searchData))}
+                onClick={() => {navigate('/'); dispatch(updateSearch(searchData))}}
                 style={{ width: "25%" }}
                 className={style.searchButton}
                 aria-label="Search"

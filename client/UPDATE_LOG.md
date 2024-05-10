@@ -111,3 +111,5 @@
 # Version 1.9
 
 1. Made piture of the day button disabled if there are no data to display
+
+2. created details page where user can now share and view required assets 
