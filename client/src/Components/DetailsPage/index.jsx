@@ -27,6 +27,20 @@ const DetailsPage = () => {
     return baseUrl.replace(":nasa_id", id);
   }
 
+  const PathRender = () => (
+    <>
+      <div className={style.pathStyle}>
+        <p>
+          <a href="/" onClick={() => dispatch(updateSearch(""))}>
+            Home
+          </a>
+          {"  "}
+          &gt;&gt; {displayData && displayData["AVAIL:Title"]}
+        </p>
+      </div>
+    </>
+  );
+
   const convertUrlsToLinks = (description) => {
     const urlRegex = /(https?:\/\/photojournal\.[^\s]+)/g;
     return description.replace(urlRegex, (url) => {
@@ -53,10 +67,8 @@ const DetailsPage = () => {
         setImageData(origImageData);
 
         setDisplayData(newData);
-        console.log("details", newData);
       } catch (error) {
         setErrors(true);
-        console.log("ERRORS", error);
       }
     };
     fetchData();
@@ -104,16 +116,16 @@ const DetailsPage = () => {
             }}
           />
           {displayData && displayData["AVAIL:Center"] && (
-            <p>Center: {displayData["AVAIL:Center"]}</p>
+            <p>Center: {displayData["AVAIL:Center"] || "Not found"}</p>
           )}
           {displayData && displayData["AVAIL:Album"] && (
-            <p>Album: {displayData["AVAIL:Album"][0]}</p>
+            <p>Album: {displayData["AVAIL:Album"][0] || "Not found"}</p>
           )}
           {displayData && displayData["AVAIL:Location"] && (
-            <p>Location: {displayData["AVAIL:Location"]}</p>
+            <p>Location: {displayData["AVAIL:Location"] || "Not found"}</p>
           )}
           {displayData && displayData["AVAIL:Photographer"] && (
-            <p>Photographer: {displayData["AVAIL:Photographer"]}</p>
+            <p>Photographer: {displayData["AVAIL:Photographer" || "Not found"]}</p>
           )}
         </div>
       </>
@@ -153,11 +165,6 @@ const DetailsPage = () => {
                 <source src={imageData.href || "#"} type="audio/mp3" />
                 Your browser does not support the audio element.
               </audio>
-              {/* <img
-                src={imageData.href || "#"}
-                alt={displayData && displayData["AVAIL:Title"]}
-                className={style.hdImgStyle}
-              /> */}
               <ShowCommonData />
             </div>
           </>
@@ -172,7 +179,8 @@ const DetailsPage = () => {
         <div>Asset not found</div>
       ) : (
         <>
-        {displayData && displayData.length === 0 && <LoadingMason />}
+          <PathRender />
+          {displayData && displayData.length === 0 && <LoadingMason />}
           <RenderData
             renderedData={displayData && displayData["AVAIL:MediaType"]}
           />

@@ -38,7 +38,6 @@ const MasonLayout = ({ url, popular, hideLoader }) => {
     try {
       const recent = await fetch(url);
       if (!recent.ok) {
-        console.log("FAILED BADLY")
         setError(`Failed to fetch data. Status: ${recent.status}`);
         throw new Error(`Failed to fetch data. Status: ${recent.status}`);
       }

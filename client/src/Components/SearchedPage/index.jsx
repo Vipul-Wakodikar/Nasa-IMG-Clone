@@ -75,8 +75,6 @@ const SearchedPage = () => {
         .replace(':searchValue', searchValue);
     }
 
-    console.log('first', import.meta.env.VITE_SEARCHED_DATA, getSearchApiUrl(pageNo, mediaType, searchValue))
-
     return (
       <>
         <div>

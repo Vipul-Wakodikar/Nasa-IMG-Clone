@@ -2,7 +2,7 @@ import React, { lazy, Suspense } from "react";
 import { useSelector } from "react-redux";
 import { Route, Routes, Navigate } from "react-router-dom";
 import NotFound from "./Components/NotFound";
-import Header from "./Components/Header2";
+import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import DetailsPage from "./Components/DetailsPage";
 

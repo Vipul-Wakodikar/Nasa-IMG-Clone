@@ -5,9 +5,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { updateSearch } from "../../features/data/dataSlice";
 import { setMediaType } from "../../features/data/mediaTypeSlice";
 import NasaLogo from "../../Containers/Logo";
+import Spinner from "../../Containers/Spinner";
+import {useNavigate} from 'react-router-dom'
 
-const Header = () => {
-  const [cardData, setCardData] = useState();
+const Header2 = () => {
+  const [cardData, setCardData] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [modalData, setModalData] = useState(null); // Store data for modal
   const [searchData, setSearchData] = useState("random");
@@ -15,6 +17,8 @@ const Header = () => {
   const dispatch = useDispatch();
   const searchValue = useSelector((state) => state.data.value);
   const mediaTypes = useSelector((state) => state.mediaType.value);
+  const navigate = useNavigate()
+
   const fetchData = async () => {
     try {
       const api_url = await fetch(import.meta.env.VITE_APOD_API);
@@ -35,7 +39,9 @@ const Header = () => {
     fetchData();
   }, []);
 
-  useEffect(() => {if (cardData !== null) setModalData(cardData)},[cardData])
+  useEffect(() => {
+    if (cardData !== null) setModalData(cardData);
+  }, [cardData]);
 
   const openCardModal = (data) => {
     setOpenModal(true);
@@ -48,7 +54,6 @@ const Header = () => {
   };
 
   const CheckboxMediaButtons = () => {
-
     const handleMediaChange = (selectedMediaType) => {
       const selectedMediaTypes = mediaTypes.split(",");
       const index = selectedMediaTypes.indexOf(selectedMediaType);
@@ -113,7 +118,6 @@ const Header = () => {
     <>
       <header className={`${style.header} ${style.headerBackground}`}>
         <div>
-          <RenderLogoInfo />
           <div className={style.searchBar}>
             <div className={style.searchGlow}>
               <input
@@ -128,7 +132,7 @@ const Header = () => {
                 }}
               />
               <button
-                onClick={() => dispatch(updateSearch(searchData))}
+                onClick={() => {navigate('/'); dispatch(updateSearch(searchData))}}
                 style={{ width: "25%" }}
                 className={style.searchButton}
                 aria-label="Search"
@@ -151,8 +155,11 @@ const Header = () => {
             <button
               onClick={() => openCardModal(cardData)}
               className={style.mediaType}
+              disabled={cardData && cardData.length === 0}
             >
-              Picture of the day
+              {
+                cardData && cardData.length === 0 ? ("Loading ...") : ("Picture of the day")
+              }
             </button>
             <CheckboxMediaButtons />
           </div>
@@ -168,4 +175,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Header2;
